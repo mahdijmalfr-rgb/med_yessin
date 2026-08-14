@@ -5,6 +5,11 @@ import requests
 from bidi.algorithm import get_display
 from datetime import datetime
 import socket
+import nltk
+nltk.download('punkt')
+nltk.download('punkt_tab')
+nltk.download('brown')
+nltk.download('averaged_perceptron_tagger')
 
 st.set_page_config(page_title="ai med yessine")
 class SmartAnalyticBot:
