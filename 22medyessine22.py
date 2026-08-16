@@ -12,7 +12,7 @@ nltk.download('punkt')
 nltk.download('punkt_tab')
 nltk.download('brown')
 nltk.download('averaged_perceptron_tagger')
-
+user_input = ""
 st.set_page_config(page_title="ai med yessine")
 class SmartAnalyticBot:
     def __init__(self):
