@@ -129,7 +129,9 @@ class SmartAnalyticBot:
         
         if any(word in user_input for word in self.info_triggers):
             search_query = user_input.replace("search"," ")
-            reponse +=(f"🌐 جاري البحث في الإنترنت عن: [{search_query}] ...")
+            search_query2 = search_query.replace("بحث"," ")
+            search_query3 = search_query2.replace("info"," ")
+            reponse +=(f"🌐 جاري البحث في الإنترنت عن: [{search_query3}] ...")
             info_result = self.fetch_internet_info(search_query)
             info_result2 = info_result.replace("info", " ")
             reponse +=(f"📚 النتيجة: {info_result2}")
