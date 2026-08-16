@@ -6,6 +6,8 @@ from bidi.algorithm import get_display
 from datetime import datetime
 import socket
 import nltk
+from langdetect import detect
+
 nltk.download('punkt')
 nltk.download('punkt_tab')
 nltk.download('brown')
