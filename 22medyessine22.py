@@ -75,23 +75,26 @@ class SmartAnalyticBot:
         try:
             user_lang = detect(user_input)
             if user_lang == 'ar':
-                response = requests.get(url2, headers=headers)
+                response = requests.get(url2, headers=headers, timeout=5)
                 if response.status_code == 200:
                     data = response.json()
                     
             elif user_lang == 'fr':
-                response = requests.get(url3, headers=headers)
+                response = requests.get(url3, headers=headers, timeout=5)
                 if response.status_code == 200:
                     data = response.json()
         
             else:
-                response = requests.get(url, headers=headers)
+                response = requests.get(url, headers=headers, timeout=5)
                 if response.status_code == 200:
                     data = response.json()
                     
                 
         except Exception as e:
             return f"حدث خطأ: {e}"
+        
+          
+
         reponse += (get_wiki_summary(user_input))
 
     def process_message(self, raw_input):
