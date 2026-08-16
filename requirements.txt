@@ -3,4 +3,5 @@ textblob
 deep-translator
 requests
 python-bidi
+langdetect
 
