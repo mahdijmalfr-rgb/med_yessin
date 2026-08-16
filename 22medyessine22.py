@@ -16,7 +16,7 @@ user_input = ""
 st.set_page_config(page_title="ai med yessine")
 class SmartAnalyticBot:
     def __init__(self):
-       # """إعداد المتغيرات الأساسية للبوت"""
+        """إعداد المتغيرات الأساسية للبوت"""
         self.bot_name = "🤖 AI Assistant"
         self.trigger_words = ['traduire', 'translate', 'ترجم']
         self.exit_words = ['exit', 'quit', 'خروج']
@@ -28,7 +28,7 @@ class SmartAnalyticBot:
         
         
     def clean_command_words(self, text, triggers=None):
-        #"""دالة مخصصة لحذف كلمات الأوامر وعلامات الترقيم من النص"""
+        """دالة مخصصة لحذف كلمات الأوامر وعلامات الترقيم من النص"""
         if triggers is None:
             triggers = self.trigger_words
         clean_text = text
@@ -37,12 +37,12 @@ class SmartAnalyticBot:
         return clean_text.replace(":", "").strip()
 
     def fix_arabic_text(self, text):
-        #"""دالة مخصصة لإصلاح الحروف العربية المفتتة والاتجاه المعكوس"""
+        """دالة مخصصة لإصلاح الحروف العربية المفتتة والاتجاه المعكوس"""
         #reshaped_text = arabic_reshaper.reshape(text)
         #return get_display(reshaped_text)
         return text
     def get_sentiment_label(self, score):
-        #"""دالة مخصصة لتحليل نتيجة المشاعر وإعطاء الوصف المناسب"""
+        """دالة مخصصة لتحليل نتيجة المشاعر وإعطاء الوصف المناسب"""
         if score > 0:
             return "good 😊"
         elif score < 0:
@@ -50,7 +50,7 @@ class SmartAnalyticBot:
         return "ok 😐"
 
     def save_to_log(self, original, corrected, keywords, sentiment):
-        #"""دالة مخصصة لحفظ تفاصيل كل دورة في ملف نصي خارجي (الذاكرة)"""
+        """دالة مخصصة لحفظ تفاصيل كل دورة في ملف نصي خارجي (الذاكرة)"""
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(self.log_file, "a", encoding="utf-8") as file:
             file.write(f"Time: {current_time}\n")
@@ -63,7 +63,7 @@ class SmartAnalyticBot:
     
 
     def fetch_internet_info(self, query):
-        #"""دالة جديدة مخصصة للبحث وجلب المعلومات من الإنترنت"""
+        """دالة جديدة مخصصة للبحث وجلب المعلومات من الإنترنت"""
         
         headers = {
             'User-Agent': 'MySmartBot/1.0 (Contact: example@email.com)'
