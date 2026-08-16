@@ -62,7 +62,7 @@ class SmartAnalyticBot:
 
     
 
-        def fetch_internet_info(self, query):
+    def fetch_internet_info(self, query):
         #"""دالة جديدة مخصصة للبحث وجلب المعلومات من الإنترنت"""
         
         headers = {
