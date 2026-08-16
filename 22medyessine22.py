@@ -89,8 +89,7 @@ class SmartAnalyticBot:
                 if response.status_code == 200:
                     data = response.json()
                     
-                else:
-                    return f"خطأ: السيرفر رد بالكود {response.status_code}"
+                
         except Exception as e:
             return f"حدث خطأ: {e}"
         reponse += (get_wiki_summary(user_input))
