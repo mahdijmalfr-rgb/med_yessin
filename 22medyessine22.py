@@ -81,17 +81,21 @@ class SmartAnalyticBot:
         
         try:
             # حماية دالة اكتشاف اللغة
-            try:
-                user_lang = detect(query)
-            except:
-                user_lang = 'en' # لغة افتراضية عند الفشل
-                
-            if user_lang == 'ar':
-                response = requests.get(url2, headers=headers, timeout=5)
-            elif user_lang == 'fr':
-                response = requests.get(url3, headers=headers, timeout=5)
+            is_arabic = any("\u0600" <= char <= "\u06FF" for char in query)
+            if is_arabic:
+                response = requests.get(url_ar, headers=headers, timeout=5)
             else:
-                response = requests.get(url, headers=headers, timeout=5)
+                try:
+                    user_lang = detect(query)
+                except:
+                    user_lang = 'en' # لغة افتراضية عند الفشل
+                
+                if user_lang == 'ar':
+                   response = requests.get(url2, headers=headers, timeout=5)
+                elif user_lang == 'fr':
+                     response = requests.get(url3, headers=headers, timeout=5)
+                else:
+                    response = requests.get(url, headers=headers, timeout=5)
                 
             # إرجاع النتيجة بشكل صحيح
             if response.status_code == 200:
