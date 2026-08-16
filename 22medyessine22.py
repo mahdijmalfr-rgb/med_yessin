@@ -83,7 +83,7 @@ class SmartAnalyticBot:
                 response = requests.get(url3, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
-                    return data.get("extract", "لا يوجد ملخص")
+        return data.get("extract", "لا يوجد ملخص")
             else:
                 response = requests.get(url, headers=headers)
                 if response.status_code == 200:
