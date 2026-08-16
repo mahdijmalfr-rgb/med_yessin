@@ -67,14 +67,20 @@ class SmartAnalyticBot:
             
             # رابط API الرسمي لويكيبيديا (بدلاً من المكتبة)
         url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
-        
+        # مثال للاستخدام داخل الكود:
         try:
-            response = requests.get(url, headers=headers)
-            if response.status_code == 200:
-                data = response.json()
-                return data.get("extract", "لا يوجد ملخص")
+            user_lang = detect(user_input)
+            if user_lang == 'ar':
+                reponse += "مرحباً! لقد اكتشفت أنك تتحدث العربية.\n"
+            elif user_lang == 'fr':
+                reponse += "Bonjour! Je vois que tu parles français.\n"
             else:
-                return f"خطأ: السيرفر رد بالكود {response.status_code}"
+                response = requests.get(url, headers=headers)
+                if response.status_code == 200:
+                    data = response.json()
+                    return data.get("extract", "لا يوجد ملخص")
+                else:
+                    return f"خطأ: السيرفر رد بالكود {response.status_code}"
         except Exception as e:
             return f"حدث خطأ: {e}"
         reponse += (get_wiki_summary(user_input))
