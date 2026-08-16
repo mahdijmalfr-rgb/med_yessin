@@ -159,7 +159,7 @@ if __name__ == "__main__":
     
     st.write(reponse1)
     # دالة زر Enter
-    raw_input = st.text_input("اكتب سؤالك أو الأمر هنا (مثال: search او translate ثم اكمل الجملة)
+    raw_input = st.text_input("اكتب سؤالك أو الأمر هنا (مثال: search او translate ثم اكمل الجملة)")
     :")
 
     # 2. التحقق والتنفيذ
