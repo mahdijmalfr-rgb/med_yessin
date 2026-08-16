@@ -73,12 +73,12 @@ class SmartAnalyticBot:
         try:
             user_lang = detect(user_input)
             if user_lang == 'ar':
-                response = requests.get(url, headers=headers)
+                response = requests.get(url2, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
                     return data.get("extract", "لا يوجد ملخص")
             elif user_lang == 'fr':
-                response = requests.get(url, headers=headers)
+                response = requests.get(url3, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
                     return data.get("extract", "لا يوجد ملخص")
