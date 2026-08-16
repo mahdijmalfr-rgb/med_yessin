@@ -60,42 +60,49 @@ class SmartAnalyticBot:
             file.write(f"Sentiment Analysis: {sentiment}\n")
             file.write("-" * 40 + "\n")
 
-    def fetch_internet_info(self, query):
+    
+
+        def fetch_internet_info(self, query):
         """دالة جديدة مخصصة للبحث وجلب المعلومات من الإنترنت"""
         
         headers = {
-                'User-Agent': 'MySmartBot/1.0 (Contact: example@email.com)'
-            }
-            
-            # رابط API الرسمي لويكيبيديا (بدلاً من المكتبة)
+            'User-Agent': 'MySmartBot/1.0 (Contact: example@email.com)'
+        }
+        
+        # تنظيف الكلمة لتفادي أخطاء اللغة
+        query = query.strip()
+        if not query:
+            return "يرجى كتابة كلمة للبحث عنها."
+
+        # روابط API لويكيبيديا
         url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
         url2 = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
         url3 = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
-        # مثال للاستخدام داخل الكود:
+        
         try:
-            user_lang = detect(user_input)
+            # حماية دالة اكتشاف اللغة
+            try:
+                user_lang = detect(query)
+            except:
+                user_lang = 'en' # لغة افتراضية عند الفشل
+                
             if user_lang == 'ar':
                 response = requests.get(url2, headers=headers, timeout=5)
-                if response.status_code == 200:
-                    data = response.json()
-                    
             elif user_lang == 'fr':
                 response = requests.get(url3, headers=headers, timeout=5)
-                if response.status_code == 200:
-                    data = response.json()
-        
             else:
                 response = requests.get(url, headers=headers, timeout=5)
-                if response.status_code == 200:
-                    data = response.json()
-                    
+                
+            # إرجاع النتيجة بشكل صحيح
+            if response.status_code == 200:
+                data = response.json()
+                return data.get("extract", "لا يوجد ملخص متاح.")
+            else:
+                return "لم يتم العثور على مقال بهذا الاسم."
                 
         except Exception as e:
             return f"حدث خطأ: {e}"
         
-          
-
-
     def process_message(self, raw_input):
         reponse=""
 
