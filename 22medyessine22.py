@@ -95,7 +95,6 @@ class SmartAnalyticBot:
         
           
 
-        reponse += (get_wiki_summary(user_input))
 
     def process_message(self, raw_input):
         reponse=""
