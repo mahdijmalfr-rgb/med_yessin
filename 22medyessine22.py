@@ -78,17 +78,17 @@ class SmartAnalyticBot:
                 response = requests.get(url2, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
-                    return data.get("extract", "لا يوجد ملخص")
+                    
             elif user_lang == 'fr':
                 response = requests.get(url3, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
-        return data.get("extract", "لا يوجد ملخص")
+        
             else:
                 response = requests.get(url, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
-                    return data.get("extract", "لا يوجد ملخص")
+                    
                 else:
                     return f"خطأ: السيرفر رد بالكود {response.status_code}"
         except Exception as e:
