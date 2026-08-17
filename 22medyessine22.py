@@ -83,7 +83,7 @@ class SmartAnalyticBot:
             # حماية دالة اكتشاف اللغة
             is_arabic = any("\u0600" <= char <= "\u06FF" for char in query)
             if is_arabic:
-                response = requests.get(url_ar, headers=headers, timeout=5)
+                response = requests.get(url2, headers=headers, timeout=5)
             else:
                 try:
                     user_lang = detect(query)
