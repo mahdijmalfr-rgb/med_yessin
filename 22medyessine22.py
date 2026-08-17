@@ -137,7 +137,7 @@ class SmartAnalyticBot:
             search_query3 = search_query2.replace("info"," ")
             reponse +=(f"🌐 جاري البحث في الإنترنت عن: [{search_query3}] ...")
             info_result = self.fetch_internet_info(search_query3)
-            info_result2 = info_result.replace("info", " ")
+            info_result2 = info_result.replace("Recherche", " ")
             reponse +=(f"📚 النتيجة: {info_result2}")
         # 3. حساب المشاعر
         
