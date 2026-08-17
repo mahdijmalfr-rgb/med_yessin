@@ -21,7 +21,7 @@ class SmartAnalyticBot:
         self.trigger_words = ['traduire', 'translate', 'ترجم']
         self.exit_words = ['exit', 'quit', 'خروج']
         self.log_file = "chat_history.txt"  # اسم ملف الذاكرة
-        self.info_triggers = ['info', 'search', 'معلومة', 'بحث']
+        self.info_triggers = ['Recherche', 'search', 'معلومة', 'بحث']
         reponse = ""
         reponse1 = ""
         user_input = ""
