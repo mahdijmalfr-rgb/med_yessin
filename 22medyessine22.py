@@ -91,9 +91,9 @@ class SmartAnalyticBot:
                     user_lang = 'en' # لغة افتراضية عند الفشل
                 
                 if user_lang == 'ar':
-                   response = requests.get(url2, headers=headers, timeout=5)
+                    response = requests.get(url2, headers=headers, timeout=5)
                 elif user_lang == 'fr':
-                     response = requests.get(url3, headers=headers, timeout=5)
+                    response = requests.get(url3, headers=headers, timeout=5)
                 else:
                     response = requests.get(url, headers=headers, timeout=5)
                 
@@ -134,7 +134,7 @@ class SmartAnalyticBot:
         if any(word in user_input for word in self.info_triggers):
             search_query = user_input.replace("search"," ")
             search_query2 = search_query.replace("بحث"," ")
-            search_query3 = search_query2.replace("info"," ")
+            search_query3 = search_query2.replace("Recherche"," ")
             reponse +=(f"🌐 جاري البحث في الإنترنت عن: [{search_query3}] ...")
             info_result = self.fetch_internet_info(search_query3)
             info_result2 = info_result.replace("Recherche", " ")
