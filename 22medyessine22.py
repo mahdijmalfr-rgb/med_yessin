@@ -14,6 +14,7 @@ nltk.download('brown')
 nltk.download('averaged_perceptron_tagger')
 user_input = ""
 st.set_page_config(page_title="ai med yessine")
+reponse = ""
 class SmartAnalyticBot:
     def __init__(self):
         """إعداد المتغيرات الأساسية للبوت"""
@@ -22,7 +23,7 @@ class SmartAnalyticBot:
         self.exit_words = ['exit', 'quit', 'خروج']
         self.log_file = "chat_history.txt"  # اسم ملف الذاكرة
         self.info_triggers = ['Recherche', 'search', 'معلومة', 'بحث']
-        reponse = ""
+        
         reponse1 = ""
         user_input = ""
         
