@@ -1,4 +1,3 @@
-
 streamlit
 textblob
 deep-translator
