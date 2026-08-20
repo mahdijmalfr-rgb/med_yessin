@@ -131,9 +131,15 @@ class SmartAnalyticBot:
         # 1. طباعة التصحيح الإملائي
         
         if any(word in user_input for word in self.info_triggers):
-            search_query = user_input.replace("search"," ")
-            search_query2 = search_query.replace("بحث"," ")
-            search_query3 = search_query2.replace("Recherche"," ")
+            trigger_words = ['info', 'search', 'بحث', 'معلومة']
+            info_result2 = info_result
+
+            for word in trigger_words:
+            info_result2 = info_result2.replace(word, "")
+
+            # لإزالة المسافات الزائدة من البداية والنهاية
+            info_result2 = info_result2.strip() 
+
             reponse +=(f"🌐 جاري البحث في الإنترنت عن: [{search_query3}] ...")
             info_result = self.fetch_internet_info(search_query3)
             info_result2 = info_result.replace("Recherche", " ")
