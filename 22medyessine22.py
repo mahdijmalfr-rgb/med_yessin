@@ -108,7 +108,7 @@ class SmartAnalyticBot:
         reponse += "-" * 40 + "\n\n"
         
         if any(word in user_input for word in self.info_triggers):
-            trigger_words = ['info', 'search', 'بحث', 'معلومة', 'ابحث','recherche']
+            trigger_words = ['info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
             # ⬅️ التغيير 7: تعريف المتغير info_result2 وإعطائه قيمة الإدخال قبل بدء حلقة الاستبدال لمنع خطأ (UnboundLocalError)
             info_result2 = user_input 
             
