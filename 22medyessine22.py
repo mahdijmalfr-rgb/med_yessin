@@ -163,7 +163,7 @@ if __name__ == "__main__":
     # ⬅️ التغيير 11: استخدام st.markdown لعرض رسالة الترحيب بشكل أنيق
     welcome_msg = """
     ==================================================
-    **AI Assistant:** Welcome to the organized version with external memory!
+    welcome in my project!!
     ==================================================
     """
     st.title("المعلم")
