@@ -200,5 +200,5 @@ if __name__ == "__main__":
 
     # 2. التحقق والتنفيذ
     if raw_input:
-        result = bot.process_message(raw_input)
-        st.write(result)  # 👈 طباعة متغير result الصحيح
+        
+        st.write(reponse)  # 👈 طباعة متغير result الصحيح
