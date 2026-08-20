@@ -22,7 +22,7 @@ class SmartAnalyticBot:
         self.trigger_words = ['traduire', 'translate', 'ترجم']
         self.exit_words = ['exit', 'quit', 'خروج']
         self.log_file = "chat_history.txt"
-        self.info_triggers = ['recherche', 'search', 'معلومة', 'بحث']
+        self.info_triggers = ['recherche','ابحث', 'search', 'معلومة', 'بحث']
         
         # ⬅️ التغيير 3: مسح المتغيرات (reponse1, user_input) من هنا لأنها كانت فارغة ولا داعي لتعريفها في دالة التهيئة (__init__)
 
