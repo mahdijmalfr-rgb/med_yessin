@@ -132,6 +132,10 @@ class SmartAnalyticBot:
         
         if any(word in user_input for word in self.info_triggers):
             trigger_words = ['info', 'search', 'بحث', 'معلومة']
+            
+
+            reponse +=(f"🌐 جاري البحث في الإنترنت عن: [{search_query}] ...")
+            info_result = self.fetch_internet_info(search_query)
             info_result2 = info_result
 
             for word in trigger_words:
@@ -139,10 +143,6 @@ class SmartAnalyticBot:
 
             # لإزالة المسافات الزائدة من البداية والنهاية
             info_result2 = info_result2.strip() 
-
-            reponse +=(f"🌐 جاري البحث في الإنترنت عن: [{search_query3}] ...")
-            info_result = self.fetch_internet_info(search_query3)
-            info_result2 = info_result.replace("Recherche", " ")
             reponse +=(f"📚 النتيجة: {info_result2}")
         # 3. حساب المشاعر
         
