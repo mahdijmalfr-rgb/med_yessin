@@ -139,10 +139,10 @@ class SmartAnalyticBot:
             info_result2 = info_result
 
             for word in trigger_words:
-            info_result2 = info_result2.replace(word, "")
+                info_result2 = info_result2.replace(word, "")
 
             # لإزالة المسافات الزائدة من البداية والنهاية
-            info_result2 = info_result2.strip() 
+                info_result2 = info_result2.strip() 
             reponse +=(f"📚 النتيجة: {info_result2}")
         # 3. حساب المشاعر
         
