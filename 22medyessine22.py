@@ -63,7 +63,7 @@ class SmartAnalyticBot:
                     file.write("-" * 40 + "\n")
             
             except Exception as e:
-            return (f"Error saving log: {e}") =(f"Error saving log: {e}")
+                return (f"Error saving log: {e}") =(f"Error saving log: {e}")
             
     
 
