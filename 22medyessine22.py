@@ -8,10 +8,10 @@ import socket
 import nltk
 from langdetect import detect
 
-nltk.download('punkt')
-nltk.download('punkt_tab')
-nltk.download('brown')
-nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt', quiet=True)
+nltk.download('punkt_tab', quiet=True)
+nltk.download('brown', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
 user_input = ""
 st.set_page_config(page_title="ai med yessine")
 reponse = ""
@@ -53,13 +53,17 @@ class SmartAnalyticBot:
         """دالة مخصصة لحفظ تفاصيل كل دورة في ملف نصي خارجي (الذاكرة)"""
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(self.log_file, "a", encoding="utf-8") as file:
-            file.write(f"Time: {current_time}\n")
-            file.write(f"Original Text: {original}\n")
-            file.write(f"Corrected Text: {corrected}\n")
-            file.write(f"Keywords Found: {keywords}\n")
-            file.write(f"Sentiment Analysis: {sentiment}\n")
-            file.write("-" * 40 + "\n")
-
+            try:
+                with open (self.log_file, "a", encoding="utf-8") as file:
+                    file.write(f"Time: {current_time}\n")
+                    file.write(f"Original Text: {original}\n")
+                    file.write(f"Corrected Text: {corrected}\n")
+                    file.write(f"Keywords Found: {keywords}\n")
+                    file.write(f"Sentiment Analysis: {sentiment}\n")
+                    file.write("-" * 40 + "\n")
+            except Exception as e:
+            rponse =(f"Error saving log: {e}")
+            
     
 
     def fetch_internet_info(self, query):
@@ -141,7 +145,7 @@ class SmartAnalyticBot:
                 info_result2 = info_result2.replace(word, "")
 
             # لإزالة المسافات الزائدة من البداية والنهاية
-                info_result2 = info_result2.strip() 
+            info_result2 = info_result2.strip() 
             reponse +=(f"🌐 جاري البحث في الإنترنت عن: [{info_result2}] ...")
             info_result = self.fetch_internet_info(info_result2)
             
