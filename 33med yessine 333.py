@@ -22,7 +22,7 @@ class SmartAnalyticBot:
         self.trigger_words = ['traduire', 'translate', 'ترجم']
         self.exit_words = ['exit', 'quit', 'خروج']
         self.log_file = "chat_history.txt"
-        self.info_triggers = ['recherche', 'search', 'معلومة', 'بحث']
+        self.info_triggers = ['recherche', 'search','ابحث', 'معلومة', 'بحث']
         
     def clean_command_words(self, text, triggers):
         """دالة مخصصة لحذف كلمات الأوامر وعلامات الترقيم من النص"""
@@ -111,7 +111,7 @@ class SmartAnalyticBot:
         
         # 1. حالة البحث
         if any(word in user_input for word in self.info_triggers):
-            trigger_words = ['info', 'search', 'بحث', 'معلومة', 'recherche']
+            trigger_words = ['info', 'search', 'بحث', 'معلومة','ابحث' , 'recherche']
             info_result2 = user_input
             
             for word in trigger_words:
