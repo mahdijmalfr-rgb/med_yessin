@@ -62,7 +62,8 @@ class SmartAnalyticBot:
                     file.write(f"Sentiment Analysis: {sentiment}\n")
                     file.write("-" * 40 + "\n")
             except Exception as e:
-            rponse =(f"Error saving log: {e}")
+            except Exception as e:
+            return (f"Error saving log: {e}") =(f"Error saving log: {e}")
             
     
 
