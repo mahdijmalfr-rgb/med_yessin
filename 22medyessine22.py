@@ -29,12 +29,11 @@ class SmartAnalyticBot:
         
     def clean_command_words(self, text, triggers=None):
         """دالة مخصصة لحذف كلمات الأوامر وعلامات الترقيم من النص"""
-        if triggers is None:
-            triggers = self.trigger_words
-        clean_text = text
+        
         for word in triggers:
             clean_text = clean_text.replace(word, "")
-        return clean_text.replace(":", "").strip()
+            clean_text.replace(":", "").strip()
+            clean_text = clean_text.strip
 
     def fix_arabic_text(self, text):
         """دالة مخصصة لإصلاح الحروف العربية المفتتة والاتجاه المعكوس"""
