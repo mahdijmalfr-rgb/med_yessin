@@ -91,9 +91,9 @@ class SmartAnalyticBot:
                      #return data.get("extract", "لا يوجد ملخص متاح.")
                  #else:
                      #return "لم يتم العثور على مقال بهذا الاسم."
-            return reponse        
-        except Exception as e:
-            return f"حدث خطأ في الاتصال: {e}"
+        return reponse        
+    except Exception as e:
+        return f"حدث خطأ في الاتصال: {e}"
         
     def process_message(self, raw_input):
         reponse = ""
