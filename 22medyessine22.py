@@ -86,14 +86,16 @@ class SmartAnalyticBot:
             data = response.json()
             return  data.get("extract", "لا يوجد ملخص متاح.")   
         else:
-            return "لم يتم العثور على مقال بهذا الاسم."
-                #if response.status_code == 200:
-                        #
-                        #return data.get("extract", "لا يوجد ملخص متاح.")
-                 #else:
-                     #return "لم يتم العثور على مقال بهذا الاسم."
-        #except Exception as e:
-            #return f"حدث خطأ في الاتصال: {e}"
+            try:
+            #return "لم يتم العثور على مقال بهذا الاسم."
+                if response.status_code == 200:
+                    response = requests.get(urll, headers=headers, timeout=5)
+                    data = response.json()    
+                    return data.get("extract", "لا يوجد ملخص متاح.")
+                else:
+                    return "لم يتم العثور على مقال بهذا الاسم."
+            except Exception as e:
+                return f"حدث خطأ في الاتصال: {e}"
             
     
         
