@@ -67,7 +67,7 @@ class SmartAnalyticBot:
         url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
         url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
 
-        urll =f"https://wiktionary.org/api/rest_v1/page/definition/{query}"  
+        
         
         try:
             user_lang = detect(query)
@@ -89,6 +89,7 @@ class SmartAnalyticBot:
             try:
             #return "لم يتم العثور على مقال بهذا الاسم."
                 if response.status_code == 200:
+                    urll =f"https://{user_lang}wiktionary.org/api/rest_v1/page/definition/{query}"  
                     response = requests.get(urll, headers=headers, timeout=5)
                     data = response.json()    
                     return data.get("extract", "لا يوجد ملخص متاح.")
