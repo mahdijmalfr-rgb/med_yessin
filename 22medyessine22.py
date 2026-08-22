@@ -66,13 +66,7 @@ class SmartAnalyticBot:
         url_en = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
         url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
         url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
-        params = {
-        "action": "opensearch",
-        "search": query,
-        "limit": 1,
-        "namespace": 0,
-        "format": "json"
-        }
+       
         
         
         try:
@@ -81,11 +75,11 @@ class SmartAnalyticBot:
             user_lang = 'en'
                 
         if user_lang == 'ar':
-            response = requests.get(url_ar, headers=headers,params=params, timeout=5)
+            response = requests.get(url_ar, headers=headers, timeout=5)
         elif user_lang == 'fr':
-            response = requests.get(url_fr, headers=headers,params=params, timeout=5)
+            response = requests.get(url_fr, headers=headers, timeout=5)
         else:
-            response = requests.get(url_en, headers=headers,params=params, timeout=5)
+            response = requests.get(url_en, headers=headers, timeout=5)
                 
         if response.status_code == 200:
             #response = requests.get(urll, headers=headers, timeout=5)
