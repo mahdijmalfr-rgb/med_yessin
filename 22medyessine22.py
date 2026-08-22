@@ -71,9 +71,14 @@ class SmartAnalyticBot:
         
         try:
             user_lang = detect(query)
+             for word in trigger_words:
+                info_result = info_result.replace(word, "")
+
         except:
             user_lang = 'en'
-                
+             for word in trigger_words:
+                info_result = info_result.replace(word, "")
+    
         if user_lang == 'ar':
             response = requests.get(url_ar, headers=headers, timeout=5)
         elif user_lang == 'fr':
@@ -123,9 +128,7 @@ class SmartAnalyticBot:
             info_result2 = info_result2.strip() 
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
             info_result = self.fetch_internet_info(info_result2)
-            for word in trigger_words:
-                info_result = info_result.replace(word, "")
-
+           
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
         elif any(word in user_input for word in self.trigger_words):
