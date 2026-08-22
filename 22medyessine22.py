@@ -68,7 +68,7 @@ class SmartAnalyticBot:
         url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
 
         urll =f"https://wiktionary.org/api/rest_v1/page/definition/{query}"  
-        try:
+        
             try:
                 user_lang = detect(query)
             except:
