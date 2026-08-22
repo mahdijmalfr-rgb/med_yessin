@@ -69,24 +69,24 @@ class SmartAnalyticBot:
 
         urll =f"https://wiktionary.org/api/rest_v1/page/definition/{query}"  
         
-            try:
-                user_lang = detect(query)
-            except:
-                user_lang = 'en'
+        try:
+            user_lang = detect(query)
+        except:
+            user_lang = 'en'
                 
-            if user_lang == 'ar':
-                response = requests.get(url_ar, headers=headers, timeout=5)
-            elif user_lang == 'fr':
-                response = requests.get(url_fr, headers=headers, timeout=5)
-            else:
-                response = requests.get(url_en, headers=headers, timeout=5)
+        if user_lang == 'ar':
+            response = requests.get(url_ar, headers=headers, timeout=5)
+        elif user_lang == 'fr':
+            response = requests.get(url_fr, headers=headers, timeout=5)
+        else:
+            response = requests.get(url_en, headers=headers, timeout=5)
                 
-            if response.status_code == 200:
-                #response = requests.get(urll, headers=headers, timeout=5)
-                data = response.json()
-            else:
-                    return "لم يتم العثور على مقال بهذا الاسم."
-                 #if response.status_code == 200:
+        if response.status_code == 200:
+            #response = requests.get(urll, headers=headers, timeout=5)
+            data = response.json()
+        else:
+                return "لم يتم العثور على مقال بهذا الاسم."
+                #if response.status_code == 200:
                         #
                         #return data.get("extract", "لا يوجد ملخص متاح.")
                  #else:
