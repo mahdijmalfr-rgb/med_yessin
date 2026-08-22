@@ -71,13 +71,11 @@ class SmartAnalyticBot:
         
         try:
             user_lang = detect(query)
-            for word in trigger_words:
-                info_result = info_result.replace(word, "")
+            
 
         except:
             user_lang = 'en'
-            for word in trigger_words:
-                info_result = info_result.replace(word, "")
+           
     
         if user_lang == 'ar':
             response = requests.get(url_ar, headers=headers, timeout=5)
@@ -123,7 +121,8 @@ class SmartAnalyticBot:
             trigger_words = ['info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
             # ⬅️ التغيير 7: تعريف المتغير info_result2 وإعطائه قيمة الإدخال قبل بدء حلقة الاستبدال لمنع خطأ (UnboundLocalError)
             info_result2 = user_input 
-            
+            for word in trigger_words:
+                info_result2 = info_result2.replace(word, "")
             
             info_result2 = info_result2.strip() 
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
