@@ -67,7 +67,7 @@ class SmartAnalyticBot:
         url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
         url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
 
-        urll =f"https://ar.wiktionary.org/api/rest_v1/page/definition/{query}"  
+        urll =f"https://wiktionary.org/api/rest_v1/page/definition/{query}"  
         try:
             try:
                 user_lang = detect(query)
@@ -83,11 +83,13 @@ class SmartAnalyticBot:
                 
             if response.status_code == 200:
                 response = requests.get(urll, headers=headers, timeout=5)
-                if response.status_code == 200:
-                    data = response.json()
-                    return data.get("extract", "لا يوجد ملخص متاح.")
-                else:
-                    return "لم يتم العثور على مقال بهذا الاسم."
+            else:
+                 return "لم يتم العثور على مقال بهذا الاسم."
+                 if response.status_code == 200:
+                     data = response.json()
+                     return data.get("extract", "لا يوجد ملخص متاح.")
+                 else:
+                     return "لم يتم العثور على مقال بهذا الاسم."
             return reponse        
         except Exception as e:
                 return f"حدث خطأ في الاتصال: {e}"
