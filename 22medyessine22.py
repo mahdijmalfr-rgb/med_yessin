@@ -71,12 +71,12 @@ class SmartAnalyticBot:
         
         try:
             user_lang = detect(query)
-             for word in trigger_words:
+            for word in trigger_words:
                 info_result = info_result.replace(word, "")
 
         except:
             user_lang = 'en'
-             for word in trigger_words:
+            for word in trigger_words:
                 info_result = info_result.replace(word, "")
     
         if user_lang == 'ar':
