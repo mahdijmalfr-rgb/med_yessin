@@ -176,11 +176,11 @@ if __name__ == "__main__":
     bot = SmartAnalyticBot()
     
     # ⬅️ التغيير 11: استخدام st.markdown لعرض رسالة الترحيب بشكل أنيق
-    welcome_msg = "
+    welcome_msg = { "
     ==================================================
     welcome in my project!!
     ==================================================
-    "
+    "}
     st.title("المعلم")
     st.markdown(welcome_msg)
     
