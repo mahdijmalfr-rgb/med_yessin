@@ -66,7 +66,13 @@ class SmartAnalyticBot:
         url_en = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
         url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
         url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
-
+        params = {
+        "action": "opensearch",
+        "search": query,
+        "limit": 1,
+        "namespace": 0,
+        "format": "json"
+        }
         
         
         try:
