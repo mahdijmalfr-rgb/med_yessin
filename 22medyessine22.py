@@ -81,11 +81,11 @@ class SmartAnalyticBot:
             user_lang = 'en'
                 
         if user_lang == 'ar':
-            response = requests.get(url_ar, headers=headers, timeout=5)
+            response = requests.get(url_ar, headers=headers,params=params, timeout=5)
         elif user_lang == 'fr':
-            response = requests.get(url_fr, headers=headers, timeout=5)
+            response = requests.get(url_fr, headers=headers,params=params, timeout=5)
         else:
-            response = requests.get(url_en, headers=headers, timeout=5)
+            response = requests.get(url_en, headers=headers,params=params, timeout=5)
                 
         if response.status_code == 200:
             #response = requests.get(urll, headers=headers, timeout=5)
