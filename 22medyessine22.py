@@ -98,7 +98,7 @@ class SmartAnalyticBot:
             if response.status_code == 200:
                 data = response.json()
                 return data.get("extract", "لا يوجد ملخص متاح.")
-             else:
+            else:
                 return "لم يتم العثور على مقال بهذا الاسم."
                 
             except Exception as e:
