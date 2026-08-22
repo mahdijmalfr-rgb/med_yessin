@@ -70,43 +70,39 @@ class SmartAnalyticBot:
         urll_ar = f"https://ar.wiktionary.org/w/api.php/{query}"
         urll_fr = f"https://fr.wiktionary.org/w/api.php/{query}"
         urll_en = f"https://en.wiktionary.org/w/api.php/{query}"
+        
         try:
-            is_arabic = any("\u0600" <= char <= "\u06FF" for char in query)
-            if is_arabic:
-                response = requests.get(url_ar, headers=headers, timeout=5)
+            user_lang = detect(query)
+        except:
+            user_lang = 'en'
+                
+        if user_lang == 'ar':
+            response = requests.get(url_ar, headers=headers, timeout=5)
+         elif user_lang == 'fr':
+             response = requests.get(url_fr, headers=headers, timeout=5)
+        else:
+            response = requests.get(url_en, headers=headers, timeout=5)
+                
+        if response.status_code == 200:
+            try:
+                user_lang = detect(query)
+             except:
+                user_lang = 'en'
+                
+            if user_lang == 'ar':
+                response = requests.get(urll_ar, headers=headers, timeout=5)
+            elif user_lang == 'fr':
+                response = requests.get(urll_fr, headers=headers, timeout=5)
             else:
-                try:
-                    user_lang = detect(query)
-                except:
-                    user_lang = 'en'
+                 response = requests.get(urll_en, headers=headers, timeout=5)
+            if response.status_code == 200:
+                data = response.json()
+                return data.get("extract", "لا يوجد ملخص متاح.")
+             else:
+                return "لم يتم العثور على مقال بهذا الاسم."
                 
-                if user_lang == 'ar':
-                    response = requests.get(url_ar, headers=headers, timeout=5)
-                elif user_lang == 'fr':
-                    response = requests.get(url_fr, headers=headers, timeout=5)
-                else:
-                    response = requests.get(url_en, headers=headers, timeout=5)
-                
-                if response.status_code == 200:
-                    try:
-                        user_lang = detect(query)
-                    except:
-                        user_lang = 'en'
-                
-                    if user_lang == 'ar':
-                        response = requests.get(urll_ar, headers=headers, timeout=5)
-                    elif user_lang == 'fr':
-                        response = requests.get(urll_fr, headers=headers, timeout=5)
-                    else:
-                        response = requests.get(urll_en, headers=headers, timeout=5)
-                    if response.status_code == 200:
-                        data = response.json()
-                        return data.get("extract", "لا يوجد ملخص متاح.")
-                    else:
-                        return "لم يتم العثور على مقال بهذا الاسم."
-                
-        except Exception as e:
-            return f"حدث خطأ في الاتصال: {e}"
+            except Exception as e:
+                return f"حدث خطأ في الاتصال: {e}"
         
     def process_message(self, raw_input):
         reponse = ""
