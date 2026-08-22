@@ -90,7 +90,7 @@ class SmartAnalyticBot:
             if response.status_code == 200:
                  try:
                     user_lang = detect(query)
-                except:
+                 except:
                     user_lang = 'en'
                 
                 if user_lang == 'ar':
