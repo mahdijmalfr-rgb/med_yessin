@@ -84,7 +84,7 @@ class SmartAnalyticBot:
         if response.status_code == 200:
             #response = requests.get(urll, headers=headers, timeout=5)
             data = response.json()
-            return reponse
+            return data
         else:
                 return "لم يتم العثور على مقال بهذا الاسم."
                 #if response.status_code == 200:
