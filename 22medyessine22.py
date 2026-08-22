@@ -66,7 +66,10 @@ class SmartAnalyticBot:
         url_en = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
         url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
         url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
-        
+
+        urll_ar = f"https://ar.wiktionary.org/w/api.php/{query}"
+        urll_fr = f"https://fr.wiktionary.org/w/api.php/{query}"
+        urll_en = f"https://en.wiktionary.org/w/api.php/{query}"
         try:
             is_arabic = any("\u0600" <= char <= "\u06FF" for char in query)
             if is_arabic:
@@ -84,6 +87,18 @@ class SmartAnalyticBot:
                 else:
                     response = requests.get(url_en, headers=headers, timeout=5)
                 
+            if response.status_code == 200:
+                 try:
+                    user_lang = detect(query)
+                except:
+                    user_lang = 'en'
+                
+                if user_lang == 'ar':
+                    response = requests.get(urll_ar, headers=headers, timeout=5)
+                elif user_lang == 'fr':
+                    response = requests.get(urll_fr, headers=headers, timeout=5)
+                else:
+                    response = requests.get(urll_en, headers=headers, timeout=5)
             if response.status_code == 200:
                 data = response.json()
                 return data.get("extract", "لا يوجد ملخص متاح.")
