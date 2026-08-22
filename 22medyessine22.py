@@ -78,7 +78,7 @@ class SmartAnalyticBot:
                 
         if user_lang == 'ar':
             response = requests.get(url_ar, headers=headers, timeout=5)
-         elif user_lang == 'fr':
+        elif user_lang == 'fr':
              response = requests.get(url_fr, headers=headers, timeout=5)
         else:
             response = requests.get(url_en, headers=headers, timeout=5)
