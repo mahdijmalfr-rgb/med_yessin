@@ -63,9 +63,9 @@ class SmartAnalyticBot:
         if not query:
             return "يرجى كتابة كلمة للبحث عنها."
 
-        url_en = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
-        url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
-        url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
+        url_en = f"https://en.wikipedia.org/api/rest_v1/page/{query}"
+        url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/{query}"
+        url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/{query}"
         params = {
         "action": "opensearch",
         "search": query,
