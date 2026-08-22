@@ -87,22 +87,22 @@ class SmartAnalyticBot:
                 else:
                     response = requests.get(url_en, headers=headers, timeout=5)
                 
-            if response.status_code == 200:
-                try:
-                    user_lang = detect(query)
-                except:
-                    user_lang = 'en'
-                
-                if user_lang == 'ar':
-                    response = requests.get(urll_ar, headers=headers, timeout=5)
-                elif user_lang == 'fr':
-                    response = requests.get(urll_fr, headers=headers, timeout=5)
-                else:
-                    response = requests.get(urll_en, headers=headers, timeout=5)
                 if response.status_code == 200:
-                    data = response.json()
-                    return data.get("extract", "لا يوجد ملخص متاح.")
-                else:
+                    try:
+                        user_lang = detect(query)
+                    except:
+                        user_lang = 'en'
+                
+                    if user_lang == 'ar':
+                        response = requests.get(urll_ar, headers=headers, timeout=5)
+                    elif user_lang == 'fr':
+                        response = requests.get(urll_fr, headers=headers, timeout=5)
+                    else:
+                        response = requests.get(urll_en, headers=headers, timeout=5)
+                    if response.status_code == 200:
+                        data = response.json()
+                        return data.get("extract", "لا يوجد ملخص متاح.")
+                    else:
                     return "لم يتم العثور على مقال بهذا الاسم."
                 
         except Exception as e:
