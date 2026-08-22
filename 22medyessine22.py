@@ -103,7 +103,7 @@ class SmartAnalyticBot:
                         data = response.json()
                         return data.get("extract", "لا يوجد ملخص متاح.")
                     else:
-                    return "لم يتم العثور على مقال بهذا الاسم."
+                        return "لم يتم العثور على مقال بهذا الاسم."
                 
         except Exception as e:
             return f"حدث خطأ في الاتصال: {e}"
