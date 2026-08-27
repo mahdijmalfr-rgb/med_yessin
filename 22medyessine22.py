@@ -66,37 +66,37 @@ class SmartAnalyticBot:
     else:
         return 'en'  # لـ 'search' أو 'info' أو أي حالة أخرى
 
-def fetch_internet_info(self, query, user_lang):
-    headers = {'User-Agent': 'MySmartBot/1.0'}
-    query = query.strip()
-    if not query:
-        return "يرجى كتابة كلمة للبحث عنها."
+    def fetch_internet_info(self, query, user_lang):
+        headers = {'User-Agent': 'MySmartBot/1.0'}
+        query = query.strip()
+        if not query:
+            return "يرجى كتابة كلمة للبحث عنها."
 
-    url_en = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
-    url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
-    url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
+        url_en = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
+        url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
+        url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
 
-    if user_lang == 'ar':
-        response = requests.get(url_ar, headers=headers, timeout=5)
-    elif user_lang == 'fr':
-        response = requests.get(url_fr, headers=headers, timeout=5)
-    else:
-        response = requests.get(url_en, headers=headers, timeout=5)
+        if user_lang == 'ar':
+            response = requests.get(url_ar, headers=headers, timeout=5)
+        elif user_lang == 'fr':
+            response = requests.get(url_fr, headers=headers, timeout=5)
+        else:
+            response = requests.get(url_en, headers=headers, timeout=5)
 
-    if response.status_code == 200:
-        data = response.json()
-        return data.get("extract", "لا يوجد ملخص متاح.")
-    else:
-        try:
-            urll = f"https://{user_lang}.wiktionary.org/api/rest_v1/page/definition/{query}"
-            response = requests.get(urll, headers=headers, timeout=5)  # حذفنا params
-            if response.status_code == 200:
-                data = response.json()
-                return str(data)  # لاحظ: هذا الـ API بيرجع شكل مختلف عن wikipedia، لازم تتأكد منه لاحقًا
-            else:
-                return "لم يتم العثور على مقال بهذا الاسم."
-        except Exception as e:
-            return f"حدث خطأ في الاتصال: {e}"
+        if response.status_code == 200:
+            data = response.json()
+            return data.get("extract", "لا يوجد ملخص متاح.")
+        else:
+            try:
+                urll = f"https://{user_lang}.wiktionary.org/api/rest_v1/page/definition/{query}"
+                response = requests.get(urll, headers=headers, timeout=5)  # حذفنا params
+                if response.status_code == 200:
+                    data = response.json()
+                    return str(data)  # لاحظ: هذا الـ API بيرجع شكل مختلف عن wikipedia، لازم تتأكد منه لاحقًا
+                else:
+                    return "لم يتم العثور على مقال بهذا الاسم."
+            except Exception as e:
+                return f"حدث خطأ في الاتصال: {e}"
     
         
     def process_message(self, raw_input):
