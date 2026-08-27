@@ -58,13 +58,13 @@ class SmartAnalyticBot:
             print(f"Error saving log: {e}")
 
     def detect_language(self, user_input):
-    """تحديد اللغة بناءً على كلمة الأمر التي كتبها المستخدم"""
-    if any(w in user_input for w in ['recherche']):
-        return 'fr'
-    elif any(w in user_input for w in ['ابحث', 'بحث', 'معلومة']):
-        return 'ar'
-    else:
-        return 'en'  # لـ 'search' أو 'info' أو أي حالة أخرى
+        """تحديد اللغة بناءً على كلمة الأمر التي كتبها المستخدم"""
+        if any(w in user_input for w in ['recherche']):
+            return 'fr'
+        elif any(w in user_input for w in ['ابحث', 'بحث', 'معلومة']):
+            return 'ar'
+        else:
+            return 'en'  # لـ 'search' أو 'info' أو أي حالة أخرى
 
     def fetch_internet_info(self, query, user_lang):
         headers = {'User-Agent': 'MySmartBot/1.0'}
