@@ -73,14 +73,14 @@ class SmartAnalyticBot:
             
                   # تحديد اللغة حسب كلمة الأمر أولاً (أدق من langdetect للنصوص القصيرة)
             if any(w in user_input for w in ['recherche']):
-                user_lang== 'fr'
+                user_lang= 'fr'
             elif any(w in user_input for w in ['ابحث', 'بحث', 'معلومة']):
-                user_lang== 'ar'
+                user_lang= 'ar'
             elif any(w in user_input for w in ['search', 'info']):
                   # لو الأمر بالإنجليزي، جرب التخمين من الكلمة نفسها كـ fallback ف
-                 user_lang =='en'
+                 user_lang ='en'
             else :
-                user_lang =='en'
+                user_lang ='en'
 
         except:
             user_lang = 'en'
