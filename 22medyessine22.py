@@ -97,7 +97,7 @@ class SmartAnalyticBot:
                 data = response.json()
                 return str(data)  # لاحظ: هذا الـ API بيرجع شكل مختلف عن wikipedia، لازم تتأكد منه لاحقًا
             else:
-                return "لم يتم العثور على مقال بهذا الاسم."
+                return "لم يتم العثور على معنى لهذه الكلمة."
         except Exception as e:
             return f"حدث خطأ في الاتصال: {e}"
     
