@@ -76,7 +76,7 @@ class SmartAnalyticBot:
                 user_lang== 'fr'
             elif any(w in user_input for w in ['ابحث', 'بحث', 'معلومة']):
                 user_lang== 'ar'
-            elif any(w in user_input for w in ['search', 'info']):
+            else any(w in user_input for w in ['search', 'info']):
                   # لو الأمر بالإنجليزي، جرب التخمين من الكلمة نفسها كـ fallback ف
                  user_lang =='en'
   
