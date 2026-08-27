@@ -181,10 +181,10 @@ if __name__ == "__main__":
     st.title("المعلم")
     st.chat_message(welcome_msg)
     
-    raw_input = st.text_input("اكتب سؤالك أو الأمر هنا (مثال: search Tunisia أو translate hello)")
+    raw_input = st.chat_input("اكتب سؤالك أو الأمر هنا (مثال: search Tunisia أو translate hello)")
     
     if raw_input:
         # ⬅️ التغيير 12: استقبال النتيجة المعادة (return) من الدالة وعرضها في الشاشة باستخدام st.write
         final_response = bot.process_message(raw_input)
-        st.write(final_response)
+        st.chat_message(final_response)
             
