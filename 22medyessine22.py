@@ -88,6 +88,8 @@ class SmartAnalyticBot:
             data = response.json()
             return data.get("extract", "لا يوجد ملخص متاح.")
     def word_info(self, query, user_lang):
+        headers = {'User-Agent': 'MySmartBot/1.0'}
+        query = query.strip()
         try:
             urll = f"https://{user_lang}.wiktionary.org/api/rest_v1/page/definition/{query}"
             response = requests.get(urll, headers=headers, timeout=5)  # حذفنا params
