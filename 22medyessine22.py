@@ -70,12 +70,22 @@ class SmartAnalyticBot:
         
         
         try:
-            user_lang = detect(query)
+            
+                  # تحديد اللغة حسب كلمة الأمر أولاً (أدق من langdetect للنصوص القصيرة)
+            if any(w in user_input for w in ['recherche']):
+                user_lang== 'fr'
+            elif any(w in user_input for w in ['ابحث', 'بحث', 'معلومة']):
+                user_lang== 'ar'
+            elif any(w in user_input for w in ['search', 'info']):
+                  # لو الأمر بالإنجليزي، جرب التخمين من الكلمة نفسها كـ fallback ف
+                 user_lang =='en'
+  
             
 
         except:
             user_lang = 'en'
-           
+        
+
     
         if user_lang == 'ar':
             response = requests.get(url_ar, headers=headers, timeout=5)
