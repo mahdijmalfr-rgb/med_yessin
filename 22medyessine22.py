@@ -79,6 +79,10 @@ class SmartAnalyticBot:
         if user_lang == 'ar':
             response = requests.get(url_ar, headers=headers, timeout=5)
         elif user_lang == 'fr':
+            for article in ['la ', 'le ', "l'", 'les ']:
+                if query.lower().startswith(article):
+                    query = query[len(article):].strip()
+                    break
             response = requests.get(url_fr, headers=headers, timeout=5)
         else:
             response = requests.get(url_en, headers=headers, timeout=5)
