@@ -57,66 +57,53 @@ class SmartAnalyticBot:
         except Exception as e:
             print(f"Error saving log: {e}")
 
-    def fetch_internet_info(self, query):
-        headers = {'User-Agent': 'MySmartBot/1.0'}
-        query = query.strip()
-        if not query:
-            return "يرجى كتابة كلمة للبحث عنها."
+    def detect_language(self, user_input):
+    """تحديد اللغة بناءً على كلمة الأمر التي كتبها المستخدم"""
+    if any(w in user_input for w in ['recherche']):
+        return 'fr'
+    elif any(w in user_input for w in ['ابحث', 'بحث', 'معلومة']):
+        return 'ar'
+    else:
+        return 'en'  # لـ 'search' أو 'info' أو أي حالة أخرى
 
-        url_en = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
-        url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
-        url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
-       
-        
-        
+def fetch_internet_info(self, query, user_lang):
+    headers = {'User-Agent': 'MySmartBot/1.0'}
+    query = query.strip()
+    if not query:
+        return "يرجى كتابة كلمة للبحث عنها."
+
+    url_en = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"
+    url_ar = f"https://ar.wikipedia.org/api/rest_v1/page/summary/{query}"
+    url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
+
+    if user_lang == 'ar':
+        response = requests.get(url_ar, headers=headers, timeout=5)
+    elif user_lang == 'fr':
+        response = requests.get(url_fr, headers=headers, timeout=5)
+    else:
+        response = requests.get(url_en, headers=headers, timeout=5)
+
+    if response.status_code == 200:
+        data = response.json()
+        return data.get("extract", "لا يوجد ملخص متاح.")
+    else:
         try:
-            
-                  # تحديد اللغة حسب كلمة الأمر أولاً (أدق من langdetect للنصوص القصيرة)
-            if any(w in user_input for w in ['recherche']):
-                user_lang= 'fr'
-            elif any(w in user_input for w in ['ابحث', 'بحث', 'معلومة']):
-                user_lang= 'ar'
-            elif any(w in user_input for w in ['search', 'info']):
-                  # لو الأمر بالإنجليزي، جرب التخمين من الكلمة نفسها كـ fallback ف
-                 user_lang ='en'
-            else :
-                user_lang ='en'
-
-        except:
-            user_lang = 'en'
-        
-
-    
-        if user_lang == 'ar':
-            response = requests.get(url_ar, headers=headers, timeout=5)
-        elif user_lang == 'fr':
-            response = requests.get(url_fr, headers=headers, timeout=5)
-        else:
-            response = requests.get(url_en, headers=headers, timeout=5)
-                
-        if response.status_code == 200:
-            #response = requests.get(urll, headers=headers, timeout=5)
-            data = response.json()
-            return  data.get("extract", "لا يوجد ملخص متاح.")   
-        else:
-            try:
-            #return "لم يتم العثور على مقال بهذا الاسم."
-                if response.status_code == 200:
-                    urll =f"https://{user_lang}.wiktionary.org/api/rest_v1/page/definition/{query}"  
-                    response = requests.get(urll, headers=headers,params=params, timeout=5)
-                    data = response.json()    
-                    return data.get("extract", "لا يوجد ملخص متاح.")
-                else:
-                    return "لم يتم العثور على مقال بهذا الاسم."
-            except Exception as e:
-                return f"حدث خطأ في الاتصال: {e}"
-            
+            urll = f"https://{user_lang}.wiktionary.org/api/rest_v1/page/definition/{query}"
+            response = requests.get(urll, headers=headers, timeout=5)  # حذفنا params
+            if response.status_code == 200:
+                data = response.json()
+                return str(data)  # لاحظ: هذا الـ API بيرجع شكل مختلف عن wikipedia، لازم تتأكد منه لاحقًا
+            else:
+                return "لم يتم العثور على مقال بهذا الاسم."
+        except Exception as e:
+            return f"حدث خطأ في الاتصال: {e}"
     
         
     def process_message(self, raw_input):
         reponse = ""
         user_input = raw_input.lower()
-         
+        user_lang = self.detect_language(user_input)
+
         if user_input in self.exit_words:
             # ⬅️ التغيير 6: جعل الدالة تعيد (return) النص بدلاً من إضافته للمتغير فقط
             return f"\n{self.bot_name}: وداعاً! تم حفظ سجل المحادثة بنجاح. 👋"
@@ -136,7 +123,7 @@ class SmartAnalyticBot:
             
             info_result2 = info_result2.strip() 
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
-            info_result = self.fetch_internet_info(info_result2)
+            info_result = self.fetch_internet_info(info_result2,user_lang )
            
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
