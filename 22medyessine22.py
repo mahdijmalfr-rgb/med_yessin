@@ -125,8 +125,9 @@ class SmartAnalyticBot:
                     
             info_result2 = info_result2.strip() 
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
-            info_result = self.fetch_internet_info(info_result2,user_lang )
-            info_result += self.word_info(info_result2,user_lang )
+            info_result = self.word_info(info_result2,user_lang )
+            info_result += self.fetch_internet_info(info_result2,user_lang )
+            
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
         elif any(word in user_input for word in self.trigger_words):
