@@ -87,17 +87,17 @@ class SmartAnalyticBot:
         if response.status_code == 200:
             data = response.json()
             return data.get("extract", "لا يوجد ملخص متاح.")
-        else:
-            try:
-                urll = f"https://{user_lang}.wiktionary.org/api/rest_v1/page/definition/{query}"
-                response = requests.get(urll, headers=headers, timeout=5)  # حذفنا params
-                if response.status_code == 200:
-                    data = response.json()
-                    return str(data)  # لاحظ: هذا الـ API بيرجع شكل مختلف عن wikipedia، لازم تتأكد منه لاحقًا
-                else:
-                    return "لم يتم العثور على مقال بهذا الاسم."
-            except Exception as e:
-                return f"حدث خطأ في الاتصال: {e}"
+    def word_info(self, query, user_lang):
+        try:
+            urll = f"https://{user_lang}.wiktionary.org/api/rest_v1/page/definition/{query}"
+            response = requests.get(urll, headers=headers, timeout=5)  # حذفنا params
+            if response.status_code == 200:
+                data = response.json()
+                return str(data)  # لاحظ: هذا الـ API بيرجع شكل مختلف عن wikipedia، لازم تتأكد منه لاحقًا
+            else:
+                return "لم يتم العثور على مقال بهذا الاسم."
+        except Exception as e:
+            return f"حدث خطأ في الاتصال: {e}"
     
         
     def process_message(self, raw_input):
@@ -126,7 +126,7 @@ class SmartAnalyticBot:
             info_result2 = info_result2.strip() 
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
             info_result = self.fetch_internet_info(info_result2,user_lang )
-           
+            info_result += self.word_info(info_result2,user_lang )
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
         elif any(word in user_input for word in self.trigger_words):
