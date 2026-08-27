@@ -116,15 +116,12 @@ class SmartAnalyticBot:
         reponse += "-" * 40 + "\n\n"
         
         if any(word in user_input for word in self.info_triggers):
-            trigger_words = ['info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
+            trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
             # ⬅️ التغيير 7: تعريف المتغير info_result2 وإعطائه قيمة الإدخال قبل بدء حلقة الاستبدال لمنع خطأ (UnboundLocalError)
             info_result2 = user_input 
             for word in trigger_words:
                 info_result2 = info_result2.replace(word, "")
-            for article in ['la ', 'le ', "l'", 'les ']:
-                if info_result2.lower().startswith(article):
-                    info_result2 = info_result2[len(article):].strip()
-                    break
+            
                     
             info_result2 = info_result2.strip() 
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
