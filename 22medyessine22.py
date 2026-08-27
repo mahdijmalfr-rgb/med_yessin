@@ -123,7 +123,7 @@ class SmartAnalyticBot:
                 info_result2 = info_result2.replace(word, "")
             for article in ['la ', 'le ', "l'", 'les ']:
                 if query.lower().startswith(article):
-                    query = query[len(article):].strip()
+                    query = query.replace(article,"")
                     break
             info_result2 = info_result2.strip() 
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
