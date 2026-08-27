@@ -179,7 +179,7 @@ if __name__ == "__main__":
    
    
     st.title("المعلم")
-    st.markdown(welcome_msg)
+    st.chat_message(welcome_msg)
     
     raw_input = st.text_input("اكتب سؤالك أو الأمر هنا (مثال: search Tunisia أو translate hello)")
     
