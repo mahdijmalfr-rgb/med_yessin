@@ -182,7 +182,7 @@ if __name__ == "__main__":
     st.chat_message("bot").markdown(welcome_msg)
     
     raw_input = st.chat_input("اكتب سؤالك أو الأمر هنا (مثال: search Tunisia أو translate hello)")
-    st.chat_message("user")(raw_input)
+    st.chat_message("user").markdown(raw_input)
     if raw_input:
         # ⬅️ التغيير 12: استقبال النتيجة المعادة (return) من الدالة وعرضها في الشاشة باستخدام st.write
         final_response = bot.process_message(raw_input)
