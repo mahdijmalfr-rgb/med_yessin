@@ -65,7 +65,16 @@ class SmartAnalyticBot:
             return 'ar'
         else:
             return 'en'  # لـ 'search' أو 'info' أو أي حالة أخرى
+    def new_info(self, query,user_lang)
+    
 
+        from gnews import GNews
+
+        google_news = GNews(language='ar', country='SA')
+        news = google_news.get_news (query.strip())
+
+        for n in news[:5]:
+            print(n['title'], n['url'])
     def fetch_internet_info(self, query, user_lang):
         headers = {'User-Agent': 'MySmartBot/1.0'}
         query = query.strip()
@@ -129,7 +138,7 @@ class SmartAnalyticBot:
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
             info_result = self.word_info(info_result2,user_lang )
             info_result += self.fetch_internet_info(info_result2,user_lang )
-            
+            info_result += self.new_info(info_result2,user_lang )
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
         elif any(word in user_input for word in self.trigger_words):
