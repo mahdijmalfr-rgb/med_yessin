@@ -74,10 +74,16 @@ class SmartAnalyticBot:
         google_news = GNews(language= user_lang)
         news = google_news.get_news (query.strip())
 
+        if not news:
+            return []
+        
+        results = []
         for n in news[:5]:
-           
-             repe = (n['title'], n['url'])
-        return repe
+            results.append((n['title'], n['url']))
+        return results
+        
+    except Exception as e:
+        return f"حدث خطأ أثناء جلب الأخبار: {e}"
     def fetch_internet_info(self, query, user_lang):
         headers = {'User-Agent': 'MySmartBot/1.0'}
         query = query.strip()
