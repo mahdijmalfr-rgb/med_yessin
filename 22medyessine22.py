@@ -142,11 +142,11 @@ class SmartAnalyticBot:
             info_result = self.word_info(info_result2,user_lang )
             info_result += self.fetch_internet_info(info_result2,user_lang )
             news_results = self.new_info(info_result2, user_lang)
-                if isinstance(news_results, list) and news_results:
-                    for title, url in news_results:
-                        reponse += f"📰 {title}\n🔗 {url}\n\n"
-                else:
-                    reponse += "لم يتم العثور على أخبار.\n"
+            if isinstance(news_results, list) and news_results:
+                for title, url in news_results:
+                    reponse += f"📰 {title}\n🔗 {url}\n\n"
+            else:
+                reponse += "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
         elif any(word in user_input for word in self.trigger_words):
