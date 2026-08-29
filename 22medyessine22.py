@@ -74,7 +74,7 @@ class SmartAnalyticBot:
         news = google_news.get_news (query.strip())
 
         for n in news[:5]:
-            print(n['title'], n['url'])
+            return n['title'], n['url']
     def fetch_internet_info(self, query, user_lang):
         headers = {'User-Agent': 'MySmartBot/1.0'}
         query = query.strip()
