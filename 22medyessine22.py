@@ -95,12 +95,12 @@ class SmartAnalyticBot:
         url_fr = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{query}"
 
         if user_lang == 'ar':
-            return requests.get(url_ar, headers=headers, timeout=5)
+            response = requests.get(url_ar, headers=headers, timeout=5)
         elif user_lang == 'fr':
             
-            return requests.get(url_fr, headers=headers, timeout=5)
+            response =requests.get(url_fr, headers=headers, timeout=5)
         else:
-            return requests.get(url_en, headers=headers, timeout=5)
+            response =requests.get(url_en, headers=headers, timeout=5)
 
         if response.status_code == 200:
             data = response.json()
