@@ -79,7 +79,8 @@ class SmartAnalyticBot:
         
             results = []
             for n in news[:5]:
-                results=results.append((n['title'], n['url']))
+                results.append((n['title'], n['url']))
+                google_news.get_full_article(url)
             return results
         
         except Exception as e:
