@@ -78,8 +78,9 @@ class SmartAnalyticBot:
                 return []
         
             results = []
+            google_news.get_full_article(url)
             for n in news[:5]:
-                results.append((n['title'], n[google_news.get_full_article('url')]))
+                results.append((n['title'], n['url']))
                 
             return results
         
