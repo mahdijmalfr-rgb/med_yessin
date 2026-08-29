@@ -79,7 +79,7 @@ class SmartAnalyticBot:
         
             results = []
             for n in news[:5]:
-                results.append((n['title'], n['url']))
+                results=results.append((n['title'], n['url']))
             return results
         
         except Exception as e:
