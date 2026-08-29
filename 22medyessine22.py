@@ -104,7 +104,9 @@ class SmartAnalyticBot:
 
         if response.status_code == 200:
             data = response.json()
-            return data.get("extract", "لا يوجد ملخص متاح.")
+            return data.get("extract", "لا يوجد لخص متاح.")
+        else:
+            return""
     def word_info(self, query, user_lang):
         headers = {'User-Agent': 'MySmartBot/1.0'}
         query = query.strip()
