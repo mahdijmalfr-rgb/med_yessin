@@ -65,7 +65,7 @@ class SmartAnalyticBot:
             return 'ar'
         else:
             return 'en'  # لـ 'search' أو 'info' أو أي حالة أخرى
-    def new_info(self, query,user_lang)
+    def new_info(self, query,user_lang):
     
 
         from gnews import GNews
