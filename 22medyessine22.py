@@ -73,12 +73,11 @@ class SmartAnalyticBot:
         
             google_news = GNews(language= user_lang)
             news = google_news.get_news (query.strip())
-
+            google_news=google_news.get_full_article(url)
             if not news:
                 return []
         
             results = []
-            google_news.get_full_article(url)
             for n in news[:5]:
                 results.append((n['title'], n['url']))
                 
