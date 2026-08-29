@@ -4,4 +4,5 @@ deep-translator
 requests
 python-bidi
 langdetect
+gnews-GNews
 
