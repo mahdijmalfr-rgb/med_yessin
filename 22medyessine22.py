@@ -68,21 +68,21 @@ class SmartAnalyticBot:
         else:
             return 'en'  # لـ 'search' أو 'info' أو أي حالة أخرى
     def new_info(self, query,user_lang):
-    
+        try:
 
         
-        google_news = GNews(language= user_lang)
-        news = google_news.get_news (query.strip())
+            google_news = GNews(language= user_lang)
+            news = google_news.get_news (query.strip())
 
-        if not news:
-            return []
+            if not news:
+                return []
         
-        results = []
-        for n in news[:5]:
-            results.append((n['title'], n['url']))
-        return results
+            results = []
+            for n in news[:5]:
+                results.append((n['title'], n['url']))
+            return results
         
-    except Exception as e:
+        except Exception as e:
         return f"حدث خطأ أثناء جلب الأخبار: {e}"
     def fetch_internet_info(self, query, user_lang):
         headers = {'User-Agent': 'MySmartBot/1.0'}
