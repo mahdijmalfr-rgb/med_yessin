@@ -5,6 +5,8 @@ import requests
 from datetime import datetime
 import nltk
 from langdetect import detect
+from gnews import GNews
+
 
 # ⬅️ التغيير 1: إضافة quiet=True لمنع مكتبة NLTK من طباعة رسائل التحميل في واجهة المستخدم
 nltk.download('punkt', quiet=True)
@@ -68,9 +70,8 @@ class SmartAnalyticBot:
     def new_info(self, query,user_lang):
     
 
-        from gnews import GNews
-
-        google_news = GNews(language='ar', country='SA')
+        
+        google_news = GNews(language= user_lang)
         news = google_news.get_news (query.strip())
 
         for n in news[:5]:
