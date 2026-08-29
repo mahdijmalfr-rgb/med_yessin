@@ -79,7 +79,7 @@ class SmartAnalyticBot:
         
             results = []
             for n in news[:5]:
-                results.append((n['title'], n['url']))
+                results.append((n['title'], n[google_news.get_full_article('url')]))
                 
             return results
         
@@ -153,7 +153,7 @@ class SmartAnalyticBot:
             news_results = self.new_info(info_result2, user_lang)
             if isinstance(news_results, list) and news_results:
                 for title, url in news_results:
-                    info_result+= f"📰 {title}\n🔗 {google_news.get_full_article(url)}\n\n"
+                    info_result+= f"📰 {title}\n🔗 {url}\n\n"
             else:
                 info_result += "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
