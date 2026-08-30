@@ -139,7 +139,7 @@ class SmartAnalyticBot:
         info_result2 = user_input 
         for word in trigger_words:
             info_result2 = info_result2.replace(word, "")
-        for word in new_trigger_words:
+        for word in new_info_triggers:
             info_result2 = info_result2.replace(word, "")   
                     
         info_result2 = info_result2.strip() 
