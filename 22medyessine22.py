@@ -199,8 +199,8 @@ class SmartAnalyticBot:
                     MyMemoryTranslator(source='auto', target='ar').translate(clean_text)
                     reponse += f"🔤 **{sentiment_type}** | {translated}\n"
                 except Exception:
-                    return "عذراً، تعذر الاتصال بخدمة الترجمة حالياً. يرجى المحاولة لاحق
-                        reponse += "❌ عذراً، حدث خطأ في الاتصال بخدمة الترجمة.\n"
+                    
+                    reponse += "❌ عذراً، حدث خطأ في الاتصال بخدمة الترجمة.\n"
                 
         else:
             score = corrected_blob.sentiment.polarity
