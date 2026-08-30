@@ -148,7 +148,7 @@ class SmartAnalyticBot:
         
         reponse += "-" * 40 + "\n\n"
         
-        if any(word in user_input for word in self.info_triggers):
+        if self.fuzzy_match(user_input, self.info_triggers):
             trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
             # ⬅️ التغيير 7: تعريف المتغير info_result2 وإعطائه قيمة الإدخال قبل بدء حلقة الاستبدال لمنع خطأ (UnboundLocalError)
             info_result2 = user_input 
@@ -168,7 +168,7 @@ class SmartAnalyticBot:
                 info_result += "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
-        elif any(word in user_input for word in self.trigger_words):
+        elif elif self.fuzzy_match(user_input, self.trigger_words):
             # ⬅️ التغيير 8: تمرير متغير الكلمات المفتاحية (self.trigger_words) للدالة لتعرف ماذا تحذف
             clean_text = self.clean_command_words(corrected_text, self.trigger_words)
             sentiment_type = "Translate"
