@@ -179,9 +179,9 @@ class SmartAnalyticBot:
             if isinstance(news_results, list) and news_results:
                 for title, url in news_results:
                     
-                    info_result+= f"📰 {title}\n🔗[افتح المقال] ({url})\n\n"
+                    info_result = f"📰 {title}\n🔗[افتح المقال] ({url})\n\n"
             else:
-                info_result += "لم يتم العثور على أخبار.\n"
+                info_result = "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
         elif  self.fuzzy_match(user_input, self.trigger_words):
