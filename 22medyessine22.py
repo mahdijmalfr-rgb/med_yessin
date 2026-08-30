@@ -160,6 +160,8 @@ class SmartAnalyticBot:
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
             info_result = self.word_info(info_result2,user_lang )
             info_result += self.fetch_internet_info(info_result2,user_lang )
+            
+        elif self.fuzzy_match(user_input, self.new_info_triggers):   
             news_results = self.new_info(info_result2, user_lang)
             if isinstance(news_results, list) and news_results:
                 for title, url in news_results:
@@ -168,7 +170,6 @@ class SmartAnalyticBot:
             else:
                 info_result += "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
-            
         elif  self.fuzzy_match(user_input, self.trigger_words):
             # ⬅️ التغيير 8: تمرير متغير الكلمات المفتاحية (self.trigger_words) للدالة لتعرف ماذا تحذف
             clean_text = self.clean_command_words(corrected_text, self.trigger_words)
