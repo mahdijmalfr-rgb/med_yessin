@@ -25,7 +25,7 @@ class SmartAnalyticBot:
         self.exit_words = ['exit', 'quit', 'خروج']
         self.log_file = "chat_history.txt"
         self.info_triggers = ['recherche','ابحث', 'search', 'معلومة', 'بحث']
-        
+        self.new_info_triggers = ['news','media','اخبار']
         # ⬅️ التغيير 3: مسح المتغيرات (reponse1, user_input) من هنا لأنها كانت فارغة ولا داعي لتعريفها في دالة التهيئة (__init__)
 
     def clean_command_words(self, text, triggers):
@@ -163,7 +163,8 @@ class SmartAnalyticBot:
             news_results = self.new_info(info_result2, user_lang)
             if isinstance(news_results, list) and news_results:
                 for title, url in news_results:
-                    info_result+= f"📰 {title}\n🔗[افتح المقال] ({url})\n\n"
+                    for  word  in new_info_triggers :
+                        info_result+= f"📰 {title}\n🔗[افتح المقال] ({url})\n\n"
             else:
                 info_result += "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
