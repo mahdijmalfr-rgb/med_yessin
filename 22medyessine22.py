@@ -132,7 +132,7 @@ class SmartAnalyticBot:
         except Exception as e:
             return f"حدث خطأ في الاتصال: {e}"
     
-    def view_regard():
+    def view_regard(self):
         trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
         new_info_triggers = ['news','media','اخبار']
             # ⬅️ التغيير 7: تعريف المتغير info_result2 وإعطائه قيمة الإدخال قبل بدء حلقة الاستبدال لمنع خطأ (UnboundLocalError)
@@ -143,7 +143,11 @@ class SmartAnalyticBot:
             info_result2 = info_result2.replace(word, "")   
                     
         info_result2 = info_result2.strip() 
+        
         return info_result2
+
+
+    
     def process_message(self, raw_input):
         reponse = ""
         user_input = raw_input.lower()
@@ -161,14 +165,15 @@ class SmartAnalyticBot:
         
         if self.fuzzy_match(user_input, self.info_triggers):
             
-            
-                    
             info_result2=self.view_regard()
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
             info_result = self.word_info(info_result2,user_lang )
             info_result += self.fetch_internet_info(info_result2,user_lang )
             reponse += f"📚 **النتيجة:** {info_result}\n"
+
+        
         elif self.fuzzy_match(user_input, self.new_info_triggers):  
+            
             info_result2=self.view_regard()
             news_results = self.new_info(info_result2, user_lang)
             if isinstance(news_results, list) and news_results:
@@ -178,6 +183,7 @@ class SmartAnalyticBot:
             else:
                 info_result += "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
+            
         elif  self.fuzzy_match(user_input, self.trigger_words):
             # ⬅️ التغيير 8: تمرير متغير الكلمات المفتاحية (self.trigger_words) للدالة لتعرف ماذا تحذف
             clean_text = self.clean_command_words(corrected_text, self.trigger_words)
