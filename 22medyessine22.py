@@ -168,7 +168,7 @@ class SmartAnalyticBot:
                 info_result += "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
-        elif elif self.fuzzy_match(user_input, self.trigger_words):
+        elif  self.fuzzy_match(user_input, self.trigger_words):
             # ⬅️ التغيير 8: تمرير متغير الكلمات المفتاحية (self.trigger_words) للدالة لتعرف ماذا تحذف
             clean_text = self.clean_command_words(corrected_text, self.trigger_words)
             sentiment_type = "Translate"
