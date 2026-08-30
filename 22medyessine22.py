@@ -178,8 +178,8 @@ class SmartAnalyticBot:
             news_results = self.new_info(info_result2, user_lang)
             if isinstance(news_results, list) and news_results:
                 for title, url in news_results:
-                    for  word  in new_info_triggers :
-                        info_result+= f"📰 {title}\n🔗[افتح المقال] ({url})\n\n"
+                    
+                    info_result+= f"📰 {title}\n🔗[افتح المقال] ({url})\n\n"
             else:
                 info_result += "لم يتم العثور على أخبار.\n"
             reponse += f"📚 **النتيجة:** {info_result}\n"
