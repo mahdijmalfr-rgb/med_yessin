@@ -6,7 +6,7 @@ from datetime import datetime
 import nltk
 from langdetect import detect
 from gnews import GNews
-
+from rapidfuzz import fuzz
 
 # ⬅️ التغيير 1: إضافة quiet=True لمنع مكتبة NLTK من طباعة رسائل التحميل في واجهة المستخدم
 nltk.download('punkt', quiet=True)
@@ -58,7 +58,17 @@ class SmartAnalyticBot:
                 file.write("-" * 40 + "\n")
         except Exception as e:
             print(f"Error saving log: {e}")
-
+    def fuzzy_match(self, user_input, triggers, threshold=75):
+        """
+        تتحقق هل أي كلمة من كلمات الأوامر موجودة في كلام المستخدم،
+        حتى لو فيها اختلاف بسيط (خطأ إملائي، صيغة مختلفة شوية)
+        """
+        words_in_input = user_input.split()
+        for trigger in triggers:
+            for word in words_in_input:
+                if fuzz.ratio(trigger, word) >= threshold:
+                    return True
+        return False
     def detect_language(self, user_input):
         """تحديد اللغة بناءً على كلمة الأمر التي كتبها المستخدم"""
         if any(w in user_input for w in ['recherche']):
