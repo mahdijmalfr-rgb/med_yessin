@@ -132,7 +132,7 @@ class SmartAnalyticBot:
         except Exception as e:
             return f"حدث خطأ في الاتصال: {e}"
     
-    def view_regard()
+    def view_regard():
         trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
             # ⬅️ التغيير 7: تعريف المتغير info_result2 وإعطائه قيمة الإدخال قبل بدء حلقة الاستبدال لمنع خطأ (UnboundLocalError)
         info_result2 = user_input 
