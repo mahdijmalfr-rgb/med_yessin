@@ -5,4 +5,4 @@ requests
 python-bidi
 langdetect
 gnews
-
+rapidfuzz 
