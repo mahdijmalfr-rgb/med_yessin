@@ -7,6 +7,8 @@ import nltk
 from langdetect import detect
 from gnews import GNews
 from rapidfuzz import fuzz
+from deep_translator import MyMemoryTranslator
+
 
 # ⬅️ التغيير 1: إضافة quiet=True لمنع مكتبة NLTK من طباعة رسائل التحميل في واجهة المستخدم
 nltk.download('punkt', quiet=True)
@@ -192,7 +194,13 @@ class SmartAnalyticBot:
                 translated = GoogleTranslator(source='auto', target='ar').translate(clean_text)
                 reponse += f"🔤 **{sentiment_type}** | {translated}\n"
             except Exception as e:
-                reponse += "❌ عذراً، حدث خطأ في الاتصال بخدمة الترجمة.\n"
+                try:
+            # محرك بديل عند حدوث خطأ 500 أو حظر من Google
+                    MyMemoryTranslator(source='auto', target='ar').translate(clean_text))
+                    reponse += f"🔤 **{sentiment_type}** | {translated}\n"
+                except Exception:
+                    return "عذراً، تعذر الاتصال بخدمة الترجمة حالياً. يرجى المحاولة لاحق
+                        reponse += "❌ عذراً، حدث خطأ في الاتصال بخدمة الترجمة.\n"
                 
         else:
             score = corrected_blob.sentiment.polarity
