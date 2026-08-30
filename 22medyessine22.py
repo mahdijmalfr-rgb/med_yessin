@@ -160,7 +160,7 @@ class SmartAnalyticBot:
             reponse += f"🌐 **جاري البحث في الإنترنت عن:** [{info_result2}] ...\n\n"
             info_result = self.word_info(info_result2,user_lang )
             info_result += self.fetch_internet_info(info_result2,user_lang )
-            
+            reponse += f"📚 **النتيجة:** {info_result}\n"
         elif self.fuzzy_match(user_input, self.new_info_triggers):   
             news_results = self.new_info(info_result2, user_lang)
             if isinstance(news_results, list) and news_results:
