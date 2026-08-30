@@ -134,6 +134,7 @@ class SmartAnalyticBot:
     
     def view_regard():
         trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
+        new_info_triggers = ['news','media','اخبار']
             # ⬅️ التغيير 7: تعريف المتغير info_result2 وإعطائه قيمة الإدخال قبل بدء حلقة الاستبدال لمنع خطأ (UnboundLocalError)
         info_result2 = user_input 
         for word in trigger_words:
