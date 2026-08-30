@@ -195,8 +195,8 @@ class SmartAnalyticBot:
                 reponse += f"🔤 **{sentiment_type}** | {translated}\n"
             except Exception as e:
                 try:
-            # محرك بديل عند حدوث خطأ 500 أو حظر من Google
-                    MyMemoryTranslator(source='auto', target='ar').translate(clean_text))
+            
+                    MyMemoryTranslator(source='auto', target='ar').translate(clean_text)
                     reponse += f"🔤 **{sentiment_type}** | {translated}\n"
                 except Exception:
                     return "عذراً، تعذر الاتصال بخدمة الترجمة حالياً. يرجى المحاولة لاحق
