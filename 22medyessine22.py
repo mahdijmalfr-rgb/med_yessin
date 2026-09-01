@@ -128,7 +128,7 @@ class SmartAnalyticBot:
             response = requests.get(urll, headers=headers, timeout=5)  # حذفنا params
             if response.status_code == 200:
                 data = response.json()
-                return data.get("extract", "لا يوجد ملخص متاح.")# لاحظ: هذا الـ API بيرجع شكل مختلف عن wikipedia، لازم تتأكد منه لاحقًا
+                return data.get()"لا يوجد ملخص متاح.")# لاحظ: هذا الـ API بيرجع شكل مختلف عن wikipedia، لازم تتأكد منه لاحقًا
             else:
                 return "لم يتم العثور على معنى لهذه الكلمة."
         except Exception as e:
