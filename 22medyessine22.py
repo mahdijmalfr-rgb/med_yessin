@@ -124,8 +124,16 @@ class SmartAnalyticBot:
         headers = {'User-Agent': 'MySmartBot/1.0'}
         query = query.strip()
         try:
-            urll = f"https://{user_lang}.wiktionary.org/api/rest_v1/page/definition/{query}"
-            response = requests.get(urll, headers=headers, timeout=5)  # حذفنا params
+            urll_ar = f"https://ar.wiktionary.org/api/rest_v1/page/definition/{query}"
+            urll_en = f"https://en.wiktionary.org/api/rest_v1/page/definition/{query}"
+            urll_fr = f"https://fr.wiktionary.org/api/rest_v1/page/definition/{query}"
+            if user_lang == 'ar':
+                response = requests.get(urll_ar, headers=headers, timeout=5)
+            elif user_lang == 'fr':
+            
+                response =requests.get(urll_fr, headers=headers, timeout=5)
+            else:
+                response =requests.get(urll_en, headers=headers, timeout=5)
             if response.status_code == 200:
                 data = response.json()
                 return data.get()
