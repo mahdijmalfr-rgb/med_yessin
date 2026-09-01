@@ -129,15 +129,15 @@ class SmartAnalyticBot:
         urll_fr = f"https://fr.wiktionary.org/api/rest_v1/page/definition/{query}"
         try:
             if user_lang == 'ar':
-                response = requests.get(urll_ar, headers=headers, timeout=5)
+                response =requests.get(urll_ar, headers=headers, timeout=5)
             elif user_lang == 'fr':
             
                 response =requests.get(urll_fr, headers=headers, timeout=5)
             else:
                 response =requests.get(urll_en, headers=headers, timeout=5)
-            if response.status_code == 200:
+            if response.status_code==200:
                 data = response.json()
-                return data.get()
+                return data.get()# مشكلة 
             else:
                 return "لم يتم العثور على معنى لهذه الكلمة."
         except Exception as e:
