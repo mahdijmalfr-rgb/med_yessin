@@ -249,7 +249,9 @@ if __name__ == "__main__":
    
     st.title("المعلم")
     st.chat_message("bot").markdown(welcome_msg)
-    
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+        
     raw_input = st.chat_input("اكتب سؤالك أو الأمر هنا (مثال: search Tunisia أو translate hello)")
     st.chat_message("user").markdown(raw_input)
     if raw_input:
