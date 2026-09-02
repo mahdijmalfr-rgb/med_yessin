@@ -124,9 +124,9 @@ class SmartAnalyticBot:
         headers = {'User-Agent': 'MySmartBot/1.0'}
         query = query.strip()
         
-        urll_ar = f"https://ar.wiktionary.org/api/rest_v1/page/definition/{query}"
-        urll_en = f"https://en.wiktionary.org/api/rest_v1/page/definition/{query}"
-        urll_fr = f"https://fr.wiktionary.org/api/rest_v1/page/definition/{query}"
+        urll_ar = f"https://ar.wiktionary.org/wiki/{query}"
+        urll_en = f"https://en.wiktionary.org/wiki/{query}"
+        urll_fr = f"https://fr.wiktionary.org/wiki/{query}"
         try:
             if user_lang == 'ar':
                 response =requests.get(urll_ar, headers=headers, timeout=5)
