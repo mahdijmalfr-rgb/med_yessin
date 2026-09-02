@@ -238,24 +238,38 @@ class SmartAnalyticBot:
         return reponse
 
 # ----------------- تشغيل واجهة Streamlit -----------------
+
 if __name__ == "__main__":
     bot = SmartAnalyticBot()
     
-    # ⬅️ التغيير 11: استخدام st.markdown لعرض رسالة الترحيب بشكل أنيق
     welcome_msg = """==================================================
     welcome in my project!!
-    ================================================== """ 
-   
-   
+    ================================================== """
+
     st.title("المعلم")
-    st.chat_message("bot").markdown(welcome_msg)
+
+    # تهيئة الذاكرة مرة واحدة بس
     if "messages" not in st.session_state:
         st.session_state.messages = []
+
+    # عرض رسالة الترحيب
+    with st.chat_message("assistant"):
+        st.markdown(welcome_msg)
+
+    # عرض كل الرسائل القديمة المخزنة
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # مربع إدخال الشات
+    if raw_input := st.chat_input("اكتب سؤالك أو الأمر هنا (مثال: search Tunisia)"):
         
-    raw_input = st.chat_input("اكتب سؤالك أو الأمر هنا (مثال: search Tunisia أو translate hello)")
-    st.chat_message("user").markdown(raw_input)
-    if raw_input:
-        # ⬅️ التغيير 12: استقبال النتيجة المعادة (return) من الدالة وعرضها في الشاشة باستخدام st.write
+        with st.chat_message("user"):
+            st.markdown(raw_input)
+        st.session_state.messages.append({"role": "user", "content": raw_input})
+
         final_response = bot.process_message(raw_input)
-        st.chat_message("bot").markdown(final_response)
-            
+
+        with st.chat_message("assistant"):
+            st.markdown(final_response)
+        st.session_state.messages.append({"role": "assistant", "content": final_response})
