@@ -8,7 +8,7 @@ from langdetect import detect
 from gnews import GNews
 from rapidfuzz import fuzz
 from deep_translator import MyMemoryTranslator
-
+from wiktionaryparser import WiktionaryParser
 
 # ⬅️ التغيير 1: إضافة quiet=True لمنع مكتبة NLTK من طباعة رسائل التحميل في واجهة المستخدم
 nltk.download('punkt', quiet=True)
@@ -121,27 +121,13 @@ class SmartAnalyticBot:
         else:
             return""
     def word_info(self, query, user_lang):
-        headers = {'User-Agent': 'MySmartBot/1.0'}
-        query = query.strip()
         
-        urll_ar = f"https://ar.wiktionary.org/wiki/{query}"
-        urll_en = f"https://en.wiktionary.org/wiki/{query}"
-        urll_fr = f"https://fr.wiktionary.org/wiki/{query}"
-        try:
-            if user_lang == 'ar':
-                response =requests.get(urll_ar, headers=headers, timeout=5)
-            elif user_lang == 'fr':
-            
-                response =requests.get(urll_fr, headers=headers, timeout=5)
-            else:
-                response =requests.get(urll_en, headers=headers, timeout=5)
-            if response.status_code==200:
-                data = response.json()
-                return data.get()# مشكلة 
-            else:
-                return "لم يتم العثور على معنى لهذه الكلمة."
-        except Exception as e:
-            return f"حدث خطأ في الاتصال: {e}"
+
+        
+
+        parser = WiktionaryParser()
+        word = parser.fetch('good')
+        return word
     
     def view_regard(self, user_input):
         trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
