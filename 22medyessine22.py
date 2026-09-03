@@ -28,6 +28,13 @@ class SmartAnalyticBot:
         self.log_file = "chat_history.txt"
         self.info_triggers = ['recherche','ابحث', 'search', 'معلومة', 'بحث']
         self.new_info_triggers = ['news','media','اخبار']
+        self.lang_map = {
+        'ar': 'arabic',
+        'en': 'english',
+        'fr': 'french',
+        'es': 'spanish',
+        'de': 'german'
+        }
         # ⬅️ التغيير 3: مسح المتغيرات (reponse1, user_input) من هنا لأنها كانت فارغة ولا داعي لتعريفها في دالة التهيئة (__init__)
 
     def clean_command_words(self, text, triggers):
@@ -121,14 +128,14 @@ class SmartAnalyticBot:
         else:
             return""
     def word_info(self, query, user_lang):
-        
+        full_lang = lang_map.get(user_lang, 'english')
         parser = WiktionaryParser()
-        parser.set_default_language(user_lang)
+        parser.set_default_language(full_lang)
 
         
 
         
-        word = parser.fetch(query, user_lang)
+        word = parser.fetch(query, full_lang)
         return word
     
     def view_regard(self, user_input):
