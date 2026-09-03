@@ -128,7 +128,7 @@ class SmartAnalyticBot:
         
 
         
-        word = parser.fetch(query)
+        word = parser.fetch(query, user_lang)
         return word
     
     def view_regard(self, user_input):
