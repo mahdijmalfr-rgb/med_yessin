@@ -121,8 +121,9 @@ class SmartAnalyticBot:
         else:
             return""
     def word_info(self, query, user_lang):
-        parser = WiktionaryParser()
         parser.set_default_language(user_lang)
+        parser = WiktionaryParser()
+        
 
         
 
