@@ -121,12 +121,13 @@ class SmartAnalyticBot:
         else:
             return""
     def word_info(self, query, user_lang):
-        
-
-        
-
         parser = WiktionaryParser()
-        word = parser.fetch('good')
+        parser.set_default_language(user_lang)
+
+        
+
+        
+        word = parser.fetch(query)
         return word
     
     def view_regard(self, user_input):
