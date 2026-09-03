@@ -6,3 +6,4 @@ python-bidi
 langdetect
 gnews
 rapidfuzz 
+WiktionaryParser
