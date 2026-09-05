@@ -152,14 +152,16 @@ class SmartAnalyticBot:
                     for definition in meaning.get("definitions", []):
                         text = definition.get("definition", "")
                         example = definition.get("example", "")
+                        import re
+                        clean_def = re.sub(r'<[^>]+>', '', first_def)
 
                         meanings.append({
                         "نوع الكلمة": part_of_speech,
                         "المعنى": text,
                         "مثال": example
                         })
-                        for word in [']:
-                            meanings = meanings.replace(word,"")
+                        
+                        
 
 
                             
