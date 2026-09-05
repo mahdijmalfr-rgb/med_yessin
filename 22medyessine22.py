@@ -159,6 +159,9 @@ class SmartAnalyticBot:
                             "المعنى": text,
                             "مثال": example
                             })
+                            first_entry = meanings[0]
+                            clean_def = re.sub(r'<[^>]+>', '', first_def)
+                            part_of_speech = first_entry.get("partOfSpeech", "")
 
                             return meanings
 
