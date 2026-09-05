@@ -162,8 +162,7 @@ class SmartAnalyticBot:
                             import re
                             
                             clean_def = re.sub(r'<[^>]+>', '', meanings)
-                            part_of_speech = meanings.get("partOfSpeech", "")
-
+                            
                             
                             return f"({part_of_speech}) {clean_def}"
 
