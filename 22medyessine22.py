@@ -136,35 +136,34 @@ class SmartAnalyticBot:
                 response = requests.get(urll_fr, headers=headers, timeout=5)
             else:
                 
+                word = query 
+                url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
+                response = requests.get(url)
 
-                    word = query 
-                    url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
-                    response = requests.get(url)
+                if response.status_code != 200:
+                    return f"لم يتم العثور على معنى للكلمة: {word}"
 
-                    if response.status_code != 200:
-                        return f"لم يتم العثور على معنى للكلمة: {word}"
+                data = response.json()
+                meanings = []
 
-                    data = response.json()
-                    meanings = []
-
-                    for meaning in data[0].get("meanings", []):
-                        part_of_speech = meaning.get("partOfSpeech", "")
+                for meaning in data[0].get("meanings", []):
+                    part_of_speech = meaning.get("partOfSpeech", "")
         
-                        for definition in meaning.get("definitions", []):
-                            text = definition.get("definition", "")
-                            example = definition.get("example", "")
+                    for definition in meaning.get("definitions", []):
+                        text = definition.get("definition", "")
+                        example = definition.get("example", "")
 
-                            meanings.append({
-                            "نوع الكلمة": part_of_speech,
-                            "المعنى": text,
-                            "مثال": example
-                            })
-                            import re
+                        meanings.append({
+                        "نوع الكلمة": part_of_speech,
+                        "المعنى": text,
+                        "مثال": example
+                        })
+                        import re
                             
-                            clean_def = re.sub(r'<[^>]+>', '', meanings)
+                        clean_def = re.sub(r'<[^>]+>', '', meanings)
                             
                             
-                            return f"({part_of_speech}) {clean_def}"
+                        return f"({part_of_speech}) {clean_def}"
 
 
 
