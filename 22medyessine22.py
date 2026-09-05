@@ -158,12 +158,10 @@ class SmartAnalyticBot:
                         "المعنى": text,
                         "مثال": example
                         })
-                        import re
-                            
-                        clean_def = re.sub(r'<[^>]+>', '', meanings)
+                        
                             
                             
-                        return f"({part_of_speech}) {clean_def}"
+                        return meanings
 
 
 
