@@ -135,7 +135,34 @@ class SmartAnalyticBot:
             elif user_lang == 'fr':
                 response = requests.get(urll_fr, headers=headers, timeout=5)
             else:
-                response = requests.get(urll_en, headers=headers, timeout=5)
+                
+
+                    word = query 
+                    url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
+                    response = requests.get(url)
+
+                    if response.status_code != 200:
+                        return f"لم يتم العثور على معنى للكلمة: {word}"
+
+                    data = response.json()
+                    meanings = []
+
+                    for meaning in data[0].get("meanings", []):
+                        part_of_speech = meaning.get("partOfSpeech", "")
+        
+                        for definition in meaning.get("definitions", []):
+                            text = definition.get("definition", "")
+                            example = definition.get("example", "")
+
+                            meanings.append({
+                            "نوع الكلمة": part_of_speech,
+                            "المعنى": text,
+                            "مثال": example
+                            })
+
+                            return meanings
+
+
 
             if response.status_code == 200:
                 data = response.json()
