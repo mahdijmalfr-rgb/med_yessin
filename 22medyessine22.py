@@ -158,10 +158,12 @@ class SmartAnalyticBot:
                         "المعنى": text,
                         "مثال": example
                         })
-                        
+                        meanings = meanings.replace("'","")
+
+
                             
                             
-                        return meanings.replace("'","")
+                        return meanings
 
 
 
