@@ -161,7 +161,7 @@ class SmartAnalyticBot:
                         
                             
                             
-                        return meanings
+                        return meanings.replace(',"")
 
 
 
