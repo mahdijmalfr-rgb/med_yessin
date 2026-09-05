@@ -122,51 +122,51 @@ class SmartAnalyticBot:
         else:
             return""
     def word_info(self, query, user_lang):
-    headers = {'User-Agent': 'MySmartBot/1.0'}
-    query = query.strip()
+        headers = {'User-Agent': 'MySmartBot/1.0'}
+        query = query.strip()
 
-    urll_ar = f"https://ar.wiktionary.org/api/rest_v1/page/definition/{query}"
-    urll_en = f"https://en.wiktionary.org/api/rest_v1/page/definition/{query}"
-    urll_fr = f"https://fr.wiktionary.org/api/rest_v1/page/definition/{query}"
+        urll_ar = f"https://ar.wiktionary.org/api/rest_v1/page/definition/{query}"
+        urll_en = f"https://en.wiktionary.org/api/rest_v1/page/definition/{query}"
+        urll_fr = f"https://fr.wiktionary.org/api/rest_v1/page/definition/{query}"
 
-    try:
-        if user_lang == 'ar':
-            response = requests.get(urll_ar, headers=headers, timeout=5)
-        elif user_lang == 'fr':
-            response = requests.get(urll_fr, headers=headers, timeout=5)
-        else:
-            response = requests.get(urll_en, headers=headers, timeout=5)
+        try:
+            if user_lang == 'ar':
+                response = requests.get(urll_ar, headers=headers, timeout=5)
+            elif user_lang == 'fr':
+                response = requests.get(urll_fr, headers=headers, timeout=5)
+            else:
+                response = requests.get(urll_en, headers=headers, timeout=5)
 
-        if response.status_code == 200:
-            data = response.json()
+            if response.status_code == 200:
+                data = response.json()
             
-            # الرد بيكون فيه مفتاح باسم كود اللغة (ar, en, fr...) وقيمته قائمة
-            lang_key = list(data.keys())[0] if data else None
-            if not lang_key:
-                return "لم يتم العثور على معنى لهذه الكلمة."
-
-            entries = data[lang_key]
-            if not entries:
-                return "لم يتم العثور على معنى لهذه الكلمة."
+                # الرد بيكون فيه مفتاح باسم كود اللغة (ar, en, fr...) وقيمته قائمة
+                lang_key = list(data.keys())[0] if data else None
+                if not lang_key:
+                    return "لم يتم العثور على معنى لهذه الكلمة."
+    
+                entries = data[lang_key]
+                if not entries:
+                    return "لم يتم العثور على معنى لهذه الكلمة."
 
             # ناخد أول تعريف بس من أول مدخل (entry)
-            first_entry = entries[0]
-            definitions = first_entry.get("definitions", [])
+                first_entry = entries[0]
+                definitions = first_entry.get("definitions", [])
             
-            if definitions:
-                first_def = definitions[0].get("definition", "")
-                # تنظيف أي وسوم HTML موجودة في النص
-                import re
-                clean_def = re.sub(r'<[^>]+>', '', first_def)
-                part_of_speech = first_entry.get("partOfSpeech", "")
-                return f"({part_of_speech}) {clean_def}"
+                if definitions:
+                    first_def = definitions[0].get("definition", "")
+                    # تنظيف أي وسوم HTML موجودة في النص
+                    import re
+                    clean_def = re.sub(r'<[^>]+>', '', first_def)
+                    part_of_speech = first_entry.get("partOfSpeech", "")
+                    return f"({part_of_speech}) {clean_def}"
+                else:
+                    return "لم يتم العثور على معنى لهذه الكلمة."
             else:
                 return "لم يتم العثور على معنى لهذه الكلمة."
-        else:
-            return "لم يتم العثور على معنى لهذه الكلمة."
             
-    except Exception as e:
-        return f"حدث خطأ في الاتصال: {e}"
+        except Exception as e:
+            return f"حدث خطأ في الاتصال: {e}"
     
     def view_regard(self, user_input):
         trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
