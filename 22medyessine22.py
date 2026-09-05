@@ -123,7 +123,7 @@ class SmartAnalyticBot:
             return""
     def word_info(self, query, user_lang):
         
-        return none
+        return []
     
     def view_regard(self, user_input):
         trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
