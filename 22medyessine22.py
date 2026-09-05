@@ -158,7 +158,8 @@ class SmartAnalyticBot:
                         "المعنى": text,
                         "مثال": example
                         })
-                        meanings = meanings.replace("'","")
+                        for word in [']:
+                            meanings = meanings.replace(word,"")
 
 
                             
