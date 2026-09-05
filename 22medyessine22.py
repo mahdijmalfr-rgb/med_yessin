@@ -151,9 +151,9 @@ class SmartAnalyticBot:
         
                     for definition in meaning.get("definitions", []):
                         text = definition.get("definition", "")
-                        exampl = definition.get("example", "")
+                        example = definition.get("example", "")
                         import re
-                        example = re.sub(r'<[^>]+>', '', exampl)
+                        example = re.sub(r'<[^>]+>', '', example)
 
                         meanings.append({
                         "نوع الكلمة": part_of_speech,
