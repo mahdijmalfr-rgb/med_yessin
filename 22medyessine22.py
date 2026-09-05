@@ -122,21 +122,7 @@ class SmartAnalyticBot:
         else:
             return""
     def word_info(self, query, user_lang):
-        lang_map = {
-        'ar': 'arabic',
-        'en': 'english',
-        'fr': 'french',
-        'es': 'spanish',
-        'de': 'german'
-        }
-        full_lang = lang_map.get(user_lang, 'english')
-        parser = WiktionaryParser()
-        parser.set_default_language(full_lang)
-
         
-
-        
-        word = parser.fetch(query, full_lang)
         return word
     
     def view_regard(self, user_input):
