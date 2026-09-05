@@ -121,9 +121,9 @@ class SmartAnalyticBot:
             return data.get("extract", "لا يوجد لخص متاح.")
         else:
             return""
-    def word_info(self, query, user_lang):
+    #def word_info(self, query, user_lang):
         
-        return word
+        #return word
     
     def view_regard(self, user_input):
         trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
