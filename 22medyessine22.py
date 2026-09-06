@@ -135,32 +135,26 @@ class SmartAnalyticBot:
                 response = requests.get(url)
 
                 if response.status_code != 200:
-                    return f"لم يتم العثور على معنى للكلمة: {word}"
+                    return f"لم يتم العثور على معنى للكلمة: {word}".           
 
                 data = response.json()
                 meanings = []
 
                 for meaning in data[0].get("meanings", []):
                     part_of_speech = meaning.get("partOfSpeech", "")
-        
+
                     for definition in meaning.get("definitions", []):
                         text = definition.get("definition", "")
                         example = definition.get("example", "")
-                        import re
-                        example = re.sub(r'<[^>]+>', '', example)
 
                         meanings.append({
                         "نوع الكلمة": part_of_speech,
                         "المعنى": text,
                         "مثال": example
                         })
-                        
-                        
 
-
-                            
-                            
                         return meanings
+
 
 
 
