@@ -10,13 +10,11 @@ from rapidfuzz import fuzz
 from deep_translator import MyMemoryTranslator
 from wiktionaryparser import WiktionaryParser
 
-# ⬅️ التغيير 1: إضافة quiet=True لمنع مكتبة NLTK من طباعة رسائل التحميل في واجهة المستخدم
 nltk.download('punkt', quiet=True)
 nltk.download('punkt_tab', quiet=True)
 nltk.download('brown', quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)
 
-# ⬅️ التغيير 2: نقل إعداد الصفحة (set_page_config) ليكون في الأعلى خارج الـ Class
 st.set_page_config(page_title="المعلم - AI Assistant")
 
 class SmartAnalyticBot:
@@ -29,11 +27,9 @@ class SmartAnalyticBot:
         self.info_triggers = ['recherche','ابحث', 'search', 'معلومة', 'بحث']
         self.new_info_triggers = ['news','media','اخبار']
         
-        # ⬅️ التغيير 3: مسح المتغيرات (reponse1, user_input) من هنا لأنها كانت فارغة ولا داعي لتعريفها في دالة التهيئة (__init__)
 
     def clean_command_words(self, text, triggers):
         """دالة مخصصة لحذف كلمات الأوامر وعلامات الترقيم من النص"""
-        # ⬅️ التغيير 4: إصلاح المنطق البرمجي للدالة؛ تعريف clean_text أولاً ثم استبدال الكلمات، وإضافة () للـ strip في النهاية
         clean_text = text
         for word in triggers:
             clean_text = clean_text.replace(word, "")
@@ -51,7 +47,6 @@ class SmartAnalyticBot:
 
     def save_to_log(self, original, corrected, keywords, sentiment):
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        try: # ⬅️ التغيير 5: وضع كود الحفظ داخل try/except لحماية التطبيق من التوقف إذا فشل فتح ملف الذاكرة
             with open(self.log_file, "a", encoding="utf-8") as file:
                 file.write(f"Time: {current_time}\n")
                 file.write(f"Original Text: {original}\n")
@@ -182,7 +177,6 @@ class SmartAnalyticBot:
                 if not entries:
                     return "لم يتم العثور على معنى لهذه الكلمة."
 
-            # ناخد أول تعريف بس من أول مدخل (entry)
                 first_entry = entries[0]
                 definitions = first_entry.get("definitions", [])
             
@@ -204,7 +198,6 @@ class SmartAnalyticBot:
     def view_regard(self, user_input):
         trigger_words = ['la ', 'le ', "l'", 'les ','info', 'search' ,'بحث', 'معلومة' ,'ابحث','recherche']
         new_info_triggers = ['news','media','اخبار']
-            # ⬅️ التغيير 7: تعريف المتغير info_result2 وإعطائه قيمة الإدخال قبل بدء حلقة الاستبدال لمنع خطأ (UnboundLocalError)
         info_result2 = user_input 
         for word in trigger_words:
             info_result2 = info_result2.replace(word, "")
@@ -223,7 +216,6 @@ class SmartAnalyticBot:
         user_lang = self.detect_language(user_input)
 
         if user_input in self.exit_words:
-            # ⬅️ التغيير 6: جعل الدالة تعيد (return) النص بدلاً من إضافته للمتغير فقط
             return f"\n{self.bot_name}: وداعاً! تم حفظ سجل المحادثة بنجاح. 👋"
 
         blob = TextBlob(user_input)
@@ -254,7 +246,6 @@ class SmartAnalyticBot:
             reponse += f"📚 **النتيجة:** {info_result}\n"
             
         elif  self.fuzzy_match(user_input, self.trigger_words):
-            # ⬅️ التغيير 8: تمرير متغير الكلمات المفتاحية (self.trigger_words) للدالة لتعرف ماذا تحذف
             clean_text = self.clean_command_words(corrected_text, self.trigger_words)
             sentiment_type = "Translate"
             try:
