@@ -47,13 +47,13 @@ class SmartAnalyticBot:
 
     def save_to_log(self, original, corrected, keywords, sentiment):
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            with open(self.log_file, "a", encoding="utf-8") as file:
-                file.write(f"Time: {current_time}\n")
-                file.write(f"Original Text: {original}\n")
-                file.write(f"Corrected Text: {corrected}\n")
-                file.write(f"Keywords Found: {keywords}\n")
-                file.write(f"Sentiment Analysis: {sentiment}\n")
-                file.write("-" * 40 + "\n")
+        with open(self.log_file, "a", encoding="utf-8") as file:
+            file.write(f"Time: {current_time}\n")
+            file.write(f"Original Text: {original}\n")
+            file.write(f"Corrected Text: {corrected}\n")
+            file.write(f"Keywords Found: {keywords}\n")
+            file.write(f"Sentiment Analysis: {sentiment}\n")
+            file.write("-" * 40 + "\n")
         except Exception as e:
             print(f"Error saving log: {e}")
     def fuzzy_match(self, user_input, triggers, threshold=75):
