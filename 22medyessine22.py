@@ -153,7 +153,7 @@ class SmartAnalyticBot:
                         "مثال": example
                         })
 
-                        return meanings
+                return meanings
 
 
 
