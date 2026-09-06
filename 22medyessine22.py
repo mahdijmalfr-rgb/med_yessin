@@ -135,7 +135,7 @@ class SmartAnalyticBot:
                 response = requests.get(url)
 
                 if response.status_code != 200:
-                    return f"لم يتم العثور على معنى للكلمة: {word}".           
+                    return f"لم يتم العثور على معنى للكلمة: {word}"           
 
                 data = response.json()
                 meanings = []
