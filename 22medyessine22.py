@@ -315,7 +315,7 @@ class SmartAnalyticBot:
                             reponce+=line.decode("utf-8")
                 else:
                     reponse+=response.json()
-
+        return reponse 
 # ----------------- تشغيل واجهة Streamlit -----------------
 
 if __name__ == "__main__":
