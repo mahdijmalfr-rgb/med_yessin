@@ -271,13 +271,50 @@ class SmartAnalyticBot:
             if user_input != corrected_text:
                 reponse += f"🔧 **التصحيح المقترح:** {corrected_text}\n\n"
                 
-            if joined_nouns:
-                reponse += f"🔑 **Bot:** Oh, so you are talking about ({joined_nouns})?\n"
-            else:
-                reponse += "🔑 **Bot:** I couldn't capture specific keywords, but I'm listening!\n"
-                
-        # ⬅️ التغيير 10: الدالة تعيد الجواب الكامل ليتم طباعته لاحقاً في Streamlit
-        return reponse
+
+            invoke_url = "https://integrate.api.nvidia.com/v1/chat/completions"
+            stream = False
+
+            headers = {
+                "Authorization": "Bearer $NVIDIA_API_KEY",
+                "Accept": "text/event-stream" if stream else "application/json",
+            }
+
+            payload = {
+                "messages": [
+                {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What is in this image?"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "https://assets.ngc.nvidia.com/products/api-catalog/phi-3-5-vision/example1b.jpg"
+          }
+        }
+      ]
+    }
+  ],
+  "model": "google/gemma-4-31b-it",
+  "chat_template_kwargs": {
+    "enable_thinking": True
+  },
+  "max_tokens": 16384,
+  "stream": stream,
+  "temperature": 1,
+  "top_p": 0.95
+}
+
+response = requests.post(invoke_url, headers=headers, json=payload, stream=stream)
+if stream:
+    for line in response.iter_lines():
+        if line:
+            print(line.decode("utf-8"))
+else:
+    print(response.json())
 
 # ----------------- تشغيل واجهة Streamlit -----------------
 
