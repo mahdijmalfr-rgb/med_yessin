@@ -317,7 +317,7 @@ class SmartAnalyticBot:
                         if line:
                             
                              
-                            reponce = f"{ line.decode("utf-8")}"
+                            reponse = f"{ line.decode("utf-8")}"
                             abc = 0
                 else:
                     
