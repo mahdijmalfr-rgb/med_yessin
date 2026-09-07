@@ -263,15 +263,15 @@ class SmartAnalyticBot:
                 abc = 1
             elif score > 0:
                 reponse += f"**{sentiment_type}**, (Score: {score:.2f})\n\n"
-                abc =1
+                abc = 1
             else:
                 reponse += f"**{sentiment_type}**, (Score: {score:.2f})\n\n"
-                abc =1
+                abc = 1
                     
             joined_nouns = ", ".join(corrected_blob.noun_phrases)
             self.save_to_log(raw_input, corrected_text, joined_nouns, sentiment_type)
             
-            if abc =1:
+            if abc = 1:
                 reponse += f"🔧 **التصحيح المقترح:** {corrected_text}\n\n"
                 
 
@@ -316,10 +316,10 @@ class SmartAnalyticBot:
                     for line in response.iter_lines():
                         if line:
                             reponce+=line.decode("utf-8")
-                            abc =0
+                            abc = 0
                 else:
                     reponse+=response.json()
-                    abc =0
+                    abc = 0
         return reponse 
 # ----------------- تشغيل واجهة Streamlit -----------------
 
