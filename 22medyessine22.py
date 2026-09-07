@@ -271,7 +271,7 @@ class SmartAnalyticBot:
             joined_nouns = ", ".join(corrected_blob.noun_phrases)
             self.save_to_log(raw_input, corrected_text, joined_nouns, sentiment_type)
             
-            if abc = 1:
+            if abc == 1:
                 reponse += f"🔧 **التصحيح المقترح:** {corrected_text}\n\n"
                 
 
