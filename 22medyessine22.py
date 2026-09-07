@@ -308,13 +308,13 @@ class SmartAnalyticBot:
                     "top_p": 0.95
                  }
 
-response = requests.post(invoke_url, headers=headers, json=payload, stream=stream)
-if stream:
-    for line in response.iter_lines():
-        if line:
-            print(line.decode("utf-8"))
-else:
-    print(response.json())
+                 response = requests.post(invoke_url, headers=headers, json=payload, stream=stream)
+                 if stream:
+                     for line in response.iter_lines():
+                         if line:
+                             reponce+=line.decode("utf-8")
+                         else:
+                             reponse+=response.json()
 
 # ----------------- تشغيل واجهة Streamlit -----------------
 
