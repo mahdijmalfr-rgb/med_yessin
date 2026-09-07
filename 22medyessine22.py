@@ -316,13 +316,13 @@ class SmartAnalyticBot:
                     for line in response.iter_lines():
                         if line:
                             
-                            gg =line.decode("utf-8")
-                            reponce+= gg
+                             
+                            reponce = f"{ line.decode("utf-8")}"
                             abc = 0
                 else:
                     
-                    gg=response.json()
-                    reponse+= gg
+                    
+                    reponse =f"{ response.json()}"
                     abc = 0
         return reponse 
 # ----------------- تشغيل واجهة Streamlit -----------------
