@@ -334,7 +334,7 @@ if __name__ == "__main__":
     welcome in my project!!
     ================================================== """
 
-    st.title("676767")
+    st.title("مرحبا")
 
     # تهيئة الذاكرة مرة واحدة بس
     if "messages" not in st.session_state:
