@@ -275,55 +275,28 @@ class SmartAnalyticBot:
                 reponse += f"🔧 **التصحيح المقترح:** {corrected_text}\n\n"
                 
 
-                invoke_url = "https://integrate.api.nvidia.com/v1/chat/completions"
-                stream = False
+                import os
+                from groq import Groq
 
-                headers = {
-                    "Authorization": "Bearer $NVIDIA_API_KEY",
-                    "Accept": "text/event-stream" if stream else "application/json",
-                }
+                # تهيئة العميل باستخدام مفتاح الـ API الخاص بك
+                client = Groq(
+                api_key="gsk_your_api_key_here",
+                )
 
-                payload = {
-                  "messages": [
+                # إرسال طلب محادثة لأحد النماذج السريعة
+                chat_completion = client.chat.completions.create(
+                messages=[
                     {
-                      "role": "user",
-                      "content": [
-                        {
-                          "type": "text",
-                          "text": "What is in this image?"
-                          },
-                          {
-                            "type": "image_url",
-                            "image_url": {
-                              "url": "https://assets.ngc.nvidia.com/products/api-catalog/phi-3-5-vision/example1b.jpg"
-                            }
-                          }
-                        ]
-                      }
-                    ],
-                    "model": "google/gemma-4-31b-it",
-                    "chat_template_kwargs": {
-                      "enable_thinking": True
-                    },
-                    "max_tokens": 16384,
-                    "stream": stream,
-                    "temperature": 1,
-                    "top_p": 0.95
-                }
+                    "role": "user",
+                    "content": "مرحباً، اشرح لي باختصار ما هي تقنية Groq.",
+                    }
+                ],
+    model="llama-3.1-8b-instant",  # أو أي نموذج آخر متاح
 
-                response = requests.post(invoke_url, headers=headers, json=payload, stream=stream)
-                if stream:
-                    for line in response.iter_lines():
-                        if line:
-                            
-                             
-                            reponse = f"{ line.decode("utf-8")}"
-                            abc = 0
-                else:
-                    
-                    
-                    reponse =f"{ response.json()}"
-                    abc = 0
+
+# طباعة الرد
+reponse=chat_completion.choices[0].message.content)
+                
         return reponse 
 # ----------------- تشغيل واجهة Streamlit -----------------
 
